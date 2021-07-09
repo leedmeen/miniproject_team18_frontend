@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = (props) => {
-  const {text, backgroundColor, color, fontSize, fontWeight, border, width, height, margin, padding, top, left} = props;
+  const {text, backgroundColor, color, fontSize, fontWeight, border, width, height, margin, padding, top, left, _onClick} = props;
   const styles = {
     backgroundColor: backgroundColor,
     color: color,
@@ -19,7 +19,7 @@ const Button = (props) => {
 
   return (
     <React.Fragment>
-      <Btn {...styles}>{text}</Btn>
+      <Btn {...styles} onClick={_onClick}>{text}</Btn>
     </React.Fragment>
   )
 };
@@ -37,6 +37,7 @@ Button.defaultProps = {
   padding: null,
   top: null,
   left: null,
+  _onClick: ()  => {},
 }
 
 const Btn = styled.button`
@@ -51,6 +52,7 @@ const Btn = styled.button`
   padding: ${(props) => props.padding};
   top: ${(props) => props.top};
   left: ${(props) => props.left};
+  cursor: pointer;
 `;
 
 export default Button;

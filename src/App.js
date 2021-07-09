@@ -1,8 +1,11 @@
 import React from 'react';
 import './App.css';
-import Mainpage from "./pages/MainPage";
 import {BrowserRouter, Route} from "react-router-dom";
 import {createGlobalStyle} from "styled-components";
+
+import MainPage from "./pages/MainPage";
+import PostWrite from "./pages/PostWrite";
+
 const GlobalStyle = createGlobalStyle`
   body {
     background: white;
@@ -14,7 +17,8 @@ function App() {
     <React.Fragment>
       <GlobalStyle/>
       <BrowserRouter>
-        <Route path="/" exact component={Mainpage}/>
+        <Route path="/" exact component={MainPage}/>
+        <Route path="/ads" exact component={PostWrite}/>
       </BrowserRouter>
     </React.Fragment>
   );
