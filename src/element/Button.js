@@ -42,6 +42,7 @@ Button.defaultProps = {
   right: null,
   left: null,
   bottom: null,
+  _onClick: ()  => {},
 }
 
 const Btn = styled.button`
@@ -58,6 +59,7 @@ const Btn = styled.button`
   right: ${(props) => props.right};
   left: ${(props) => props.left};
   bottom: ${(props) => props.bottom};
+  cursor: pointer;
 `;
 
 export default Button;
