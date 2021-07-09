@@ -18,7 +18,8 @@ const Grid = (props) => {
             fd,
             mh,
             dp,
-            is_right} = props;
+            is_right,
+          } = props;
 
   const styles = {
       is_center: is_center,
