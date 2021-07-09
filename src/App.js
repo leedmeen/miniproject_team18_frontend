@@ -1,10 +1,8 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import React from "react";
-import Mainpage from "../pages/MainPage";
+import Mainpage from "./pages/MainPage";
 import {BrowserRouter, Route} from "react-router-dom";
 import {createGlobalStyle} from "styled-components";
-import Grid from "../element/Grid"
 const GlobalStyle = createGlobalStyle`
   body {
     background: white;
