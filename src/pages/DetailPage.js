@@ -18,7 +18,7 @@ const DetailPage = (props) => {
             transitionEnter={false}
             transitionLeave={false}
         >
-      <Grid mh="100vh" padding='1%'>
+      <Grid mh="100vh">
        <Header/>
        <Card>
        <Post></Post>
