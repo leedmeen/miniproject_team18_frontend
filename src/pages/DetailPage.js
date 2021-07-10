@@ -10,7 +10,7 @@ const DetailPage = (props) => {
 
   return (
     <React.Fragment>
-      <Grid mh="100vh" padding='1%'>
+      <Grid mh="100vh">
        <Header/>
        <Card>
        <Post></Post>
