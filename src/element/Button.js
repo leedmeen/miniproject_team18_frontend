@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = (props) => {
-  const {text, backgroundColor, color, fontSize, fontWeight, border, borderRadius, borderTLRadius, borderTRRadius, borderBLRadius, borderBRRadius, width, height, margin, padding, top, right, left, bottom, _onClick, } = props;
+  const {text, backgroundColor, color, fontSize, fontWeight, border, borderRadius, borderTLRadius, borderTRRadius, borderBLRadius, borderBRRadius, width, maxWidth, height, maxHeight, margin, padding, top, right, left, bottom, _onClick, } = props;
   const styles = {
     backgroundColor: backgroundColor,
     color: color,
@@ -15,7 +15,9 @@ const Button = (props) => {
     borderBLRadius: borderBLRadius,
     borderBRRadius: borderBRRadius,
     width: width,
+    maxWidth: maxWidth,
     height: height,
+    maxHeight: maxHeight,
     margin: margin,
     padding: padding,
     top: top,
@@ -45,7 +47,9 @@ Button.defaultProps = {
   borderBLRadius: null,
   borderBRRadius: null,
   width: null,
+  maxWidth: null,
   height: null,
+  maxHeight: null,
   margin: null,
   padding: null,
   top: null,
@@ -67,7 +71,9 @@ const Btn = styled.button`
   border-bottom-left-radius: ${(props) => props.borderBLRadius};
   border-bottom-right-radius: ${(props) => props.borderBRRadius};
   width: ${(props) => props.width};
+  max-width: ${(props) => props.maxWidth};
   height: ${(props) => props.height};
+  max-height: ${(props) => props.maxHeight};
   margin: ${(props) => props.margin}; 
   padding: ${(props) => props.padding};
   top: ${(props) => props.top};

@@ -2,8 +2,7 @@ import React from "react";
 import Footer from "../components/Footer"
 import Grid from "../element/Grid";
 import Header from '../components/Header';
-import Card from "../components/Card"
-
+import Card from "../components/Card";
 
 const MainPage = (props) => {
 
