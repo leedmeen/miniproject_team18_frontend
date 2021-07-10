@@ -1,33 +1,35 @@
-import React from "react";
+import React, {useState, useRef} from "react";
 import Grid from "../element/Grid";
-import Input from "../element/Input";
 import Text from "../element/Text";
+import Input from "../element/Input"
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
 import NavigationIcon from '@material-ui/icons/Navigation';
 
 const PostUpdate = (props) => {
-    console.log(props);
-    const currencies = [
-        {label: '1'},
-        {label: '2'},
-        {label: '3'},
-        {label: '4'},
-        {label: '5'},
-        {label: '6'},
-        {label: '7'},
-      ];
+    
 const useStyles = makeStyles((theme) => ({
 margin: {
     margin: theme.spacing(3),
 },
-extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
 }));
 const classes = useStyles();
+
+const categoryInput = useRef(null);
+const contentInput = useRef(null);
+const peopleInput = useRef(null);
+const addData = () => {
+const inputs = {
+    id: "abc",
+    category: categoryInput.current.value,
+    content: contentInput.current.value,
+    people: peopleInput.current.value,
+}
+console.log(inputs)
+}
+
+
 
     return (
         <React.Fragment>
@@ -38,10 +40,11 @@ const classes = useStyles();
                 <TextField
                     id="outlined-multiline-static"
                     label="게시글 내용을 입력하세요"
+                    color="secondary"
                     multiline
                     rows={4}
                     defaultValue=""
-                    fullWidth="true"
+                    fullWidth="True"
                     variant="outlined"
                     />
                  </Grid>
@@ -50,8 +53,10 @@ const classes = useStyles();
                 <TextField
                     id="standard-textarea"
                     label="주제 입력"
+                    color="secondary"
+                    inputRef={categoryInput}
                     variant="outlined"
-                    fullWidth="true"
+                    fullWidth="True"
                     multiline
                     />
                 </Grid>
@@ -62,30 +67,21 @@ const classes = useStyles();
                     label="모집내용을 입력하세요"
                     multiline
                     rows={4}
-                    defaultValue=""
-                    fullWidth="true"
+                    inputRef={contentInput}
+                    color="secondary"
+                    fullWidth="True"
                     variant="outlined"
                     />
                 </Grid>
                 <Text size="1.3em" color="#3E373A">모집인원</Text>
                 <Grid width="60wv" padding="5px 0 20px 0">
-                <TextField
-                    id="standard-select-currency"
-                    select
-                    label="Select"
-                    value={currencies}
-                    helperText="모집인원을 선택하세요"
-                    >{currencies.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
+                <Input borderRadius="5px" border="2px solid #3E373A"
+                width="5%" height="20px" ref={peopleInput}></Input><Text size="1.3em" color="#3E373A">명</Text>
                 </Grid>
                 <Grid is_center>
                     <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}
                         onClick={()=> {
-                            props.history.push("/");
+                            addData();
                         }}>
                     <NavigationIcon className={classes.extendedIcon} />
                     Upload

@@ -5,12 +5,11 @@ import Header from '../components/Header';
 import Card from "../components/Card";
 
 const MainPage = (props) => {
-
     return (
         <React.Fragment>
-                <Header></Header>
+                <Header props={props}></Header>
             <Grid display="flex" fd="column" mh="100vh">
-                <Card></Card>
+                <Card props={props}></Card>
             </Grid>
             <Footer/>
         </React.Fragment>
