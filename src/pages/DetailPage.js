@@ -5,11 +5,19 @@ import Footer from '../components/Footer';
 import Post from '../components/Post';
 import CommentList from '../components/CommentList';
 import styled from 'styled-components';
+import "../share/postStyle.css";
+import { CSSTransitionGroup } from 'react-transition-group'
 
 const DetailPage = (props) => {
 
   return (
-    <React.Fragment>
+    <CSSTransitionGroup
+            transitionName="worksTransition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={false}
+            transitionLeave={false}
+        >
       <Grid mh="100vh" padding='1%'>
        <Header/>
        <Card>
@@ -18,7 +26,7 @@ const DetailPage = (props) => {
         </Card>
         </Grid>
       <Footer/>
-</React.Fragment>
+      </CSSTransitionGroup>
   )
 };
 
