@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Input = (props) => {
-  const {type, placeholder, color, fontSize, border, width, height, margin, padding, top, left, cols, rows} = props;
+  const {type, placeholder, color, fontSize, border, borderRadius, width, height, margin, padding, top, left, cols, rows} = props;
   const styles = {
     border: border,
+    borderRadius: borderRadius,
     color: color,
     fontSize: fontSize,
     width: width,
@@ -30,6 +31,7 @@ Input.defaultProps = {
   color: null,
   fontSize: null,
   border: null,
+  borderRadius: null,
   width: null,
   height: null,
   margin: null,
@@ -43,6 +45,8 @@ const Ipt = styled.input`
   color: ${(props) => props.color};
   font-size: ${(props) => props.fontSize};
   border: ${(props) => props.border};
+  border-radius: ${(props) => props.borderRadius};
+  outline: none;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};

@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Mainpage from "./pages/MainPage";
 import DetailPage from './pages/DetailPage';
 import {BrowserRouter, Route} from "react-router-dom";
 import {createGlobalStyle} from "styled-components";
@@ -19,7 +18,7 @@ function App() {
     <React.Fragment>
       <GlobalStyle/>
       <BrowserRouter>
-        <Route path="/" exact component={Mainpage}/>
+        <Route path="/" exact component={MainPage}/>
         <Route path="/detail" exact component={DetailPage}/>
         <Route path="/ads" exact component={PostWrite}/>
       </BrowserRouter>

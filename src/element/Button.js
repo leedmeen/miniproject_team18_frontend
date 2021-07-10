@@ -2,13 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = (props) => {
-  const {text, backgroundColor, color, fontSize, fontWeight, border, width, height, margin, padding, top, right, left, bottom, _onClick} = props;
+  const {text, backgroundColor, color, fontSize, fontWeight, border, borderRadius, borderTLRadius, borderTRRadius, borderBLRadius, borderBRRadius, width, height, margin, padding, top, right, left, bottom, _onClick, } = props;
   const styles = {
     backgroundColor: backgroundColor,
     color: color,
     fontSize: fontSize,
     fontWeight: fontWeight,
     border: border,
+    borderRadius: borderRadius,
+    borderTLRadius: borderTLRadius,
+    borderTRRadius: borderTRRadius,
+    borderBLRadius: borderBLRadius,
+    borderBRRadius: borderBRRadius,
     width: width,
     height: height,
     margin: margin,
@@ -34,6 +39,11 @@ Button.defaultProps = {
   fontSize: null,
   fontWeight: null,
   border: null,
+  borderRadius: null,
+  borderTLRadius: null,     // borderTopLeftRadius
+  borderTRRadius: null,
+  borderBLRadius: null,
+  borderBRRadius: null,
   width: null,
   height: null,
   margin: null,
@@ -51,6 +61,11 @@ const Btn = styled.button`
   font-size: ${(props) => props.fontSize};
   font-weight: ${(props) => props.fontWeight};
   border: ${(props) => props.border};
+  border-radius: ${(props) => props.borderRadius};
+  border-top-left-radius: ${(props) => props.borderTLRadius};
+  border-top-right-radius: ${(props) => props.borderTRRadius};
+  border-bottom-left-radius: ${(props) => props.borderBLRadius};
+  border-bottom-right-radius: ${(props) => props.borderBRRadius};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin}; 

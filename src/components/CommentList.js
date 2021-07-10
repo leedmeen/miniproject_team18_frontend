@@ -2,23 +2,23 @@ import React from 'react';
 import Text from '../element/Text';
 import Button from '../element/Button';
 import styled from 'styled-components';
+import spartalt from '../sparta-lt.png';
 
 const CommentList = (props) => {
 
   return (
     <React.Fragment>
       <Box>
-          <Div><Text>댓글 작성자</Text></Div>
-          <Text margin='0 1vw 0 0'>댓글 내용</Text>
-          <Button width='70px' height='4vh' text='수정'></Button>
-          <Button width='70px' height='4vh' margin='0 10vw 0 0' text='삭제'></Button>
+          <Div><Text color='#E8344E' bold>르탄이 <img src={spartalt} style={{width: '2vw'}}/></Text></Div>
+          <Text margin='0 1vw 0 0'>ㅁㅁㅁ라니, 정말 흥미로운 주제군요!</Text>
+          <Button width='60px' height='3vh' backgroundColor='#E8344E' color='white' border='none' borderTLRadius='1vh' borderBLRadius='1vh' fontWeight='bold' text='수정'></Button>
+            <Button width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' fontWeight='bold' backgroundColor='#E8344E' margin='0 10vw 0 0.2vw' text='삭제'></Button>
       </Box>
     </React.Fragment>
   )
 };
 
 const Div = styled.span`
-  border: 1px solid black;
   padding: 1vh 1vw 1vh 1vw;
   margin-right: 1vw;
   
