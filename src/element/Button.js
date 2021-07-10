@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = (props) => {
-  const {text, backgroundColor, color, fontSize, fontWeight, border, width, height, margin, padding, top, left, _onClick} = props;
+  const {text, backgroundColor, color, fontSize, fontWeight, border, width, height, margin, padding, top, right, left, bottom, _onClick} = props;
   const styles = {
     backgroundColor: backgroundColor,
     color: color,
@@ -14,7 +14,10 @@ const Button = (props) => {
     margin: margin,
     padding: padding,
     top: top,
+    right: right,
     left: left,
+    bottom: bottom,
+    _onClick: () => {},
   }
 
   return (
@@ -36,7 +39,9 @@ Button.defaultProps = {
   margin: null,
   padding: null,
   top: null,
+  right: null,
   left: null,
+  bottom: null,
   _onClick: ()  => {},
 }
 
@@ -51,7 +56,9 @@ const Btn = styled.button`
   margin: ${(props) => props.margin}; 
   padding: ${(props) => props.padding};
   top: ${(props) => props.top};
+  right: ${(props) => props.right};
   left: ${(props) => props.left};
+  bottom: ${(props) => props.bottom};
   cursor: pointer;
 `;
 
