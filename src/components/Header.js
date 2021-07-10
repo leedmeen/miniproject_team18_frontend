@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Grid from '../element/Grid';
 import Logo from '../gaemoim.jpg';
+import { history } from '../redux/configureStore';
 
 const Header = (props) => {
   
@@ -13,7 +14,7 @@ const Header = (props) => {
         <Menu>회원가입</Menu>
       </Grid>
       <LogoBox>
-        <Image style={{height: '10vh', width: 'auto'}} src={Logo} alt='로고'></Image>
+        <Image style={{height: '10vh', width: 'auto'}} src={Logo} alt='로고' onClick={() => history.push('/')}></Image>
       </LogoBox>
     </React.Fragment>
   )

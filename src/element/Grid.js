@@ -25,7 +25,8 @@ const Grid = (props) => {
             color,
             box_shadow,
             bbs,
-            is_right} = props;
+            is_right,
+            hover, } = props;
 
   const styles = {
       is_center: is_center,
@@ -50,6 +51,7 @@ const Grid = (props) => {
       color: color,
       bbs: bbs,
       box_shadow: box_shadow,
+      hover: hover,
   };
 
     return (<React.Fragment>
@@ -84,6 +86,7 @@ Grid.defaultProps = {
     bbs: false,
     top: false,
     _onClick: () => {},
+    hover: null,
 }
 const GridBox = styled.div`
   color: ${(props) => props.color};
@@ -121,6 +124,7 @@ const GridBox = styled.div`
       : ""}
   ${(props) => props.center ? `text-align: center;`: ""}
   ${(props) => props.line ? `border-bottom: ${props.line};` : ""}
+  ${(props) => props.hover ? `&:hover {${props.hover}}` : ''}
 `;
 
 export default Grid;

@@ -7,7 +7,7 @@ const Card = (props) => {
     return (
         <React.Fragment>
             <Grid is_center >
-                <Grid margin="0 auto" color="white" br="40px"padding="10px" width="200px" height="40px" bg="rgb(232, 52, 78)" _onClick={() => {history.push("/ads")}}>
+                <Grid margin="0 auto" color="white" br="40px"padding="10px" width="200px" height="40px" bg="rgb(232, 52, 78)" _onClick={() => {history.push("/ads")}} hover={'cursor: pointer;'}>
                  게시글 추가하기</Grid>
                 <Grid _onClick={() => {history.push("/detail")}}
                 br="40px" width="300px" height="400px" dp="inline-block" box_shadow="0 4px 25px 0px rgb(0 0 0 / 15%)" margin="20px">
