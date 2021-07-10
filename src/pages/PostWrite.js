@@ -8,7 +8,7 @@ const PostWrite = () => {
     return(
         <React.Fragment>
                 <Header></Header>
-            <Grid display="flex" fd="column" mh="100vh">
+                <Grid display="flex" fd="column" mh="100vh">
                 
                 <PostUpdate></PostUpdate>
             </Grid>

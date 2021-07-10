@@ -6,7 +6,6 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
 const Card = (props) => {
-
     const useStyles = makeStyles((theme) => ({
         fab: {
             position: 'absolute',
