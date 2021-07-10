@@ -2,11 +2,8 @@ import React from "react";
 import Footer from "../components/Footer"
 import Grid from "../element/Grid";
 import Header from '../components/Header';
-import Card from "../components/Card";
-import { makeStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import Card from "../components/Card"
+
 
 const MainPage = (props) => {
 
@@ -14,10 +11,7 @@ const MainPage = (props) => {
         <React.Fragment>
                 <Header></Header>
             <Grid display="flex" fd="column" mh="100vh">
-                
-                <Card>
-
-                </Card>
+                <Card></Card>
             </Grid>
             <Footer/>
         </React.Fragment>
