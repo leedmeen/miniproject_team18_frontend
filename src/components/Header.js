@@ -4,7 +4,7 @@ import Grid from '../element/Grid';
 import Logo from '../gaemoim.jpg';
 
 const Header = (props) => {
-
+  
   return (
     <React.Fragment>
       <Grid is_right>

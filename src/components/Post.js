@@ -16,7 +16,7 @@ const Post = (props) => {
         <Div>
             <Text color='white' size='1.8vh' bold>모집중</Text>
             </Div>
-            <Text bold size='2vh' margin='0 0 0 10px'>0/4</Text>
+            <Text bold size='2vh' margin='0 0 0 10px'>1/4명</Text>
           <span style={{float: 'right', fontSize: '1.7vh', fontWeight: 'bold'}}>작성자: 익명</span>
           <Grid is_right>
             <span style={{fontSize: '1.7vh', fontWeight: 'bold'}}>작성시각: 2021-07-10 01:33</span>

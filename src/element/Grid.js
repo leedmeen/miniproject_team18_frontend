@@ -5,7 +5,8 @@ const Grid = (props) => {
     const { is_center,
             width, 
             height,
-            margin, 
+            margin,
+            top,
             padding, 
             bg, 
             children,
@@ -30,6 +31,7 @@ const Grid = (props) => {
       is_center: is_center,
       width: width,
       height: height,
+      top: top,
       margin: margin,
       padding: padding,
       bg: bg,
@@ -80,15 +82,16 @@ Grid.defaultProps = {
     color: false,
     box_shadow: false,
     bbs: false,
+    top: false,
     _onClick: () => {},
 }
 const GridBox = styled.div`
-  overflow: hidden;
   color: ${(props) => props.color};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   min-height: calc(${(props) => props.mh});
   box-sizing: border-box;
+  top: ${(props) => props.top};
   box-shadow: ${(props) => props.box_shadow};
   border-style: ${(props) => props.bs};
   border-bottom-style: ${(props) => props.bbs};
