@@ -3,14 +3,13 @@ import Grid from "../element/Grid";
 import Input from "../element/Input";
 import Text from "../element/Text";
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-import AddIcon from '@material-ui/icons/Add';
 import NavigationIcon from '@material-ui/icons/Navigation';
 
 const PostUpdate = (props) => {
+    console.log(props);
     const currencies = [
         {label: '1'},
         {label: '2'},
@@ -22,7 +21,7 @@ const PostUpdate = (props) => {
       ];
 const useStyles = makeStyles((theme) => ({
 margin: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(3),
 },
 extendedIcon: {
     marginRight: theme.spacing(1),
@@ -32,10 +31,10 @@ const classes = useStyles();
 
     return (
         <React.Fragment>
-            <Grid is_center margin="10px 0 10px 0"><Text size="2.0em">제목</Text></Grid>
-                <Grid width="80wv" bg="#E6E6E6" is_center>
-                <Text size="1.3em" dp="inline-block">게시글 내용</Text>
+            <Grid is_center bg="#ffffff" margin="20px 0 20px 0" dp="flex"><Text size="2.0em">제목</Text></Grid>
+                <Grid box_shadow="0 4px 25px 0 rgb(0 0 0 /15%)" br="40px" margin="0 auto" width="80%" dp="flex" fd="column" is_center>
                 <Grid width="60wv" padding="5px 30px 20px 30px">
+                <Text size="1.3em" color="#3E373A">게시글 내용</Text>
                 <TextField
                     id="outlined-multiline-static"
                     label="게시글 내용을 입력하세요"
@@ -43,21 +42,21 @@ const classes = useStyles();
                     rows={4}
                     defaultValue=""
                     fullWidth="true"
-                    variant="filled"
+                    variant="outlined"
                     />
                  </Grid>
-                 <Text size="1.3em"> 주제 </Text>
-                <Grid padding="5px 30px 20px 30px">
+                <Grid width="60wv" padding="5px 30px 20px 30px">
+                <Text size="1.3em" color="#3E373A"> 주제 </Text>
                 <TextField
                     id="standard-textarea"
                     label="주제 입력"
-                    variant="filled"
+                    variant="outlined"
                     fullWidth="true"
                     multiline
                     />
                 </Grid>
-                <Text size="1.3em">모집내용</Text>
-                <Grid padding="5px 30px 20px 30px"> 
+                <Grid width="60wv" padding="5px 30px 20px 30px"> 
+                <Text size="1.3em" color="#3E373A">모집내용</Text>
                 <TextField
                     id="outlined-multiline-static"
                     label="모집내용을 입력하세요"
@@ -65,11 +64,11 @@ const classes = useStyles();
                     rows={4}
                     defaultValue=""
                     fullWidth="true"
-                    variant="filled"
+                    variant="outlined"
                     />
                 </Grid>
-                <Text size="1.3em">모집인원</Text>
-                <Grid padding="5px 0 20px 0">
+                <Text size="1.3em" color="#3E373A">모집인원</Text>
+                <Grid width="60wv" padding="5px 0 20px 0">
                 <TextField
                     id="standard-select-currency"
                     select
@@ -83,12 +82,15 @@ const classes = useStyles();
                       ))}
                     </TextField>
                 </Grid>
-            </Grid>
-            <Grid is_right>
-            <Fab variant="extended" color="primary" aria-label="add" className={classes.margin}>
-            <NavigationIcon className={classes.extendedIcon} />
-            Upload
-            </Fab>
+                <Grid is_center>
+                    <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}
+                        onClick={()=> {
+                            props.history.push("/");
+                        }}>
+                    <NavigationIcon className={classes.extendedIcon} />
+                    Upload
+                    </Fab>
+                </Grid>
             </Grid>
         </React.Fragment>
     )

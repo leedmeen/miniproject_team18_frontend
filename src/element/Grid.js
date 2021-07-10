@@ -21,6 +21,9 @@ const Grid = (props) => {
             br, //border-radius
             bs, //border-style
             bc, //border-color
+            color,
+            box_shadow,
+            bbs,
             is_right} = props;
 
   const styles = {
@@ -42,6 +45,9 @@ const Grid = (props) => {
       br: br,
       bs: bs,
       bc: bc,
+      color: color,
+      bbs: bbs,
+      box_shadow: box_shadow,
   };
 
     return (<React.Fragment>
@@ -71,15 +77,21 @@ Grid.defaultProps = {
     br: false,
     bs: false,
     bc: false,
+    color: false,
+    box_shadow: false,
+    bbs: false,
     _onClick: () => {},
 }
 const GridBox = styled.div`
   overflow: hidden;
+  color: ${(props) => props.color};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   min-height: calc(${(props) => props.mh});
   box-sizing: border-box;
+  box-shadow: ${(props) => props.box_shadow};
   border-style: ${(props) => props.bs};
+  border-bottom-style: ${(props) => props.bbs};
   border-radius: ${(props) => props.br};
   border-color: ${(props) => props.bc};
   display: ${(props) => props.dp};

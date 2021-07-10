@@ -8,7 +8,7 @@ const Header = (props) => {
 
   return (
     <React.Fragment>
-        <Grid>
+     <Grid>
       <Nav>
         <Button text='알림'/>
         <Button text='로그인'/>
