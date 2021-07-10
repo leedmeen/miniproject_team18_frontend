@@ -5,7 +5,8 @@ import Header from '../components/Header';
 import Card from "../components/Card"
 
 
-const MainPage = () => {
+const MainPage = (props) => {
+
     return (
         <React.Fragment>
                 <Header></Header>

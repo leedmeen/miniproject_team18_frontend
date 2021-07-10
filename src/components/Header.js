@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../element/Button';
 import Grid from '../element/Grid';
 import Logo from '../gaemoim.jpg';
 
@@ -9,20 +8,37 @@ const Header = (props) => {
   return (
     <React.Fragment>
       <Grid is_right>
-        <Button width='70px' height='4vh' text='알림'/>
-        <Button width='70px' height='4vh' text='로그인'/>
-        <Button width='70px' height='4vh' text='회원가입'/>
+        <Menu>알림</Menu>
+        <Menu>로그인</Menu>
+        <Menu>회원가입</Menu>
       </Grid>
       <LogoBox>
-        <img style={{height: '25vh', width: 'auto'}} src={Logo} alt='로고'></img>
+        <Image style={{height: '10vh', width: 'auto'}} src={Logo} alt='로고'></Image>
       </LogoBox>
     </React.Fragment>
   )
 };
 
+const Menu = styled.span`
+  margin: 1vw;
+  font-size: 1.4vh;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    color: #E8344E;
+  }
+`;
+
 const LogoBox = styled.div`
-  border-bottom: 7px dashed #63584f;
+  padding-bottom: 5vh;
   text-align: center;
+`;
+
+const Image = styled.img`
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 export default Header;
