@@ -9,7 +9,6 @@ import "../share/postStyle.css";
 import { CSSTransitionGroup } from 'react-transition-group'
 
 const DetailPage = (props) => {
-
   return (
     <CSSTransitionGroup
             transitionName="worksTransition"
@@ -21,7 +20,7 @@ const DetailPage = (props) => {
       <Grid mh="100vh">
        <Header/>
        <Card>
-       <Post></Post>
+       <Post id={props.match.params.id}></Post>
         <CommentList></CommentList>
         </Card>
         </Grid>

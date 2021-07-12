@@ -6,7 +6,8 @@ import Header from "../components/Header";
 import "../share/postStyle.css";
 import { CSSTransitionGroup } from 'react-transition-group'
 
-const PostWrite = () => {
+const PostWrite = (props) => {
+    console.log(props);
     return(
         <CSSTransitionGroup
             transitionName="worksTransition"
@@ -17,7 +18,7 @@ const PostWrite = () => {
         >
                 <Header></Header>
                 <Grid display="flex" fd="column" mh="100vh">
-                    <PostUpdate></PostUpdate>
+                    <PostUpdate id={props.match.params.id}></PostUpdate>
                 </Grid>
             <Footer/>
         </CSSTransitionGroup>

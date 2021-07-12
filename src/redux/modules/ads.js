@@ -18,6 +18,8 @@ const setAdsDB = ()=> {
         const axios = require("axios");
         axios.get("http://localhost:4000/Ad").then(function(response){
             dispatch(setAds(response.data))
+        }).catch(function(error) {
+            console.log(error);
         })
     }
 }
@@ -38,8 +40,28 @@ const addAdsDB = (inputs) => {
             Application_user: ["asdasd","qweqweq"],
             title: "제목제목제목",
             userId: 4}).then(function(response){
-            dispatch(addAds())
+            dispatch(addAds(response))
         })
+    }
+}
+const editAdsDB = (inputs) => {
+    return function(dispatch, getState){
+        const axios = require("axios");
+        console.log(inputs);
+        axios.put(`http://localhost:4000/Ad/${inputs.id}`,
+        {   user:{
+            id: 5,
+            accountId: "sdfg",
+            nickname: "fgh",
+            },
+            category: inputs.category,
+            content: inputs.content,
+            max_people: inputs.people,
+            createdAt: "2021-07-12",
+            Application_user: ["asdasd","qweqweq"],
+            title: "제목제목제목",
+            userId: 4}).then(function(response){
+            })
     }
 }
 
@@ -50,7 +72,6 @@ const initialState = {
             accountId: "asd",
             nickname: "asdasd",
         },
-        id: 2,
         title: "프론트 모집",
         category: "React",
         createdAt: "2021-07- 11T20:55:10.526Z",
@@ -67,8 +88,8 @@ export default handleActions(
             draft.list = [...action.payload.ads_list];
         }),
         [ADD_ADS]: (state, action) => produce(state, (draft)=> {
-            let idx = draft.list.findIndex((p) => p.id === action.payload.ads_list);
-            draft.list.unshift(action.payload.ads_list)
+            // let idx = draft.list.findIndex((p) => p.id === action.payload.ads_list);
+            draft.list.unshift(action.payload.response)
         }),
         [EDIT_ADS]: (state, action) => produce(state, (draft)=> {
 
@@ -82,6 +103,7 @@ const actionCreators = {
     addAds,
     addAdsDB,
     setAdsDB,
+    editAdsDB,
     editAds,
 }
 

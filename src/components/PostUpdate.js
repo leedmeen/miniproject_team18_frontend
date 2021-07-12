@@ -18,18 +18,17 @@ const PostUpdate = (props) => {
     },
     }));
     const classes = useStyles();
-
     const categoryInput = useRef(null);
     const contentInput = useRef(null);
     const peopleInput = useRef(null);
     const addData = () => {
         const inputs = {
-        id: "11",
+        id: props.id,
         category: categoryInput.current.value,
         content: contentInput.current.value,
         people: peopleInput.current.value,
     }
-        dispatch(adsActions.addAdsDB(inputs))
+        dispatch(adsActions.editAdsDB(inputs))
         history.goBack();
     }
 
