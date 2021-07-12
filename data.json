@@ -1,21 +1,49 @@
 {
-    "posts":[
-        {
+    "Ad":[
+        {   
+            "User": {
+                "id": 1,
+                "accountId": "asd",
+                "nickname": "asdasd"
+            },
+            "id": 1,
             "title": "title",
-            "nickname": "aaaa",
             "category": "React",
             "createdAt": "2021-07-  11T20:55:10.526Z",
             "content": "공부할사람 모집합니다!",
-            "postId": 1
-        }],
-
-    "comments":[
-        {
-            "id": 4,
-            "content": "공부할사람 모집합니다!",
+            "Application_user": ["asda", "asdasd"], 
+            "max_people": 8, 
+            "userId": 1
+        },
+        {   
+            "User": {
+                "id": 2,
+                "accountId": "asd",
+                "nickname": "asdasd"
+            },
+            "id": 2,
+            "title": "title",
+            "category": "React",
             "createdAt": "2021-07-  11T20:55:10.526Z",
-            "userId": 1,
-            "adId": 1
+            "content": "공부할사람 모집합니다!",
+            "Application_user": ["asda", "asdasd"], 
+            "max_people": 8, 
+            "userId": 2
+        },
+        {   
+            "User": {
+                "id": 3,
+                "accountId": "asd",
+                "nickname": "asdasd"
+            },
+            "id": 3,
+            "title": "title",
+            "category": "React",
+            "createdAt": "2021-07- 11T20:55:10.526Z",
+            "content": "공부할사람 모집합니다!",
+            "Application_user": ["asda", "asdasd"],
+            "max_people": 8, 
+            "userId": 3
         }
     ]
 }
