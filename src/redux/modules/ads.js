@@ -6,14 +6,39 @@ import axios from "axios";
 
 const SET_ADS = "SET_ADS";
 const DELETE = "DELETE";
+const ADD_ADS = "ADD_ADS";
+const EDIT_ADS = "EDIT_ADS"
 
 const setAds = createAction(SET_ADS, (ads_list)=> ({ads_list}));
+const addAds = createAction(ADD_ADS, (ads_list)=> ({ads_list}));
+const editAds = createAction(EDIT_ADS, (ads_list, id)=> ({ads_list, id}))
 
 const setAdsDB = ()=> {
     return function(dispatch){
         const axios = require("axios");
         axios.get("http://localhost:4000/Ad").then(function(response){
             dispatch(setAds(response.data))
+        })
+    }
+}
+const addAdsDB = (inputs) => {
+    return function(dispatch, getState){
+        const axios = require("axios");
+        axios.post("http://localhost:4000/Ad", 
+        {user:{
+            id: 5,
+            accountId: "sdfg",
+            nickname: "fgh",
+            },
+            id: inputs.id,
+            category: inputs.category,
+            content: inputs.content,
+            max_people: inputs.people,
+            createdAt: "2021-07-12",
+            Application_user: ["asdasd","qweqweq"],
+            title: "제목제목제목",
+            userId: 4}).then(function(response){
+            dispatch(addAds())
         })
     }
 }
@@ -41,13 +66,23 @@ export default handleActions(
         [SET_ADS]: (state, action) => produce(state, (draft) => {
             draft.list = [...action.payload.ads_list];
         }),
+        [ADD_ADS]: (state, action) => produce(state, (draft)=> {
+            let idx = draft.list.findIndex((p) => p.id === action.payload.ads_list);
+            draft.list.unshift(action.payload.ads_list)
+        }),
+        [EDIT_ADS]: (state, action) => produce(state, (draft)=> {
+
+        })
     },
     initialState
 );
 
 const actionCreators = {
     setAds,
-    setAdsDB
+    addAds,
+    addAdsDB,
+    setAdsDB,
+    editAds,
 }
 
 export { actionCreators };

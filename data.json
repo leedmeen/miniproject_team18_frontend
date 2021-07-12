@@ -1,49 +1,94 @@
 {
-    "Ad":[
-        {   
-            "User": {
-                "id": 1,
-                "accountId": "asd",
-                "nickname": "asdasd"
-            },
-            "id": 1,
-            "title": "title",
-            "category": "React",
-            "createdAt": "2021-07-  11T20:55:10.526Z",
-            "content": "공부할사람 모집합니다!",
-            "Application_user": ["asda", "asdasd"], 
-            "max_people": 8, 
-            "userId": 1
-        },
-        {   
-            "User": {
-                "id": 2,
-                "accountId": "asd",
-                "nickname": "asdasd"
-            },
-            "id": 2,
-            "title": "title",
-            "category": "React",
-            "createdAt": "2021-07-  11T20:55:10.526Z",
-            "content": "공부할사람 모집합니다!",
-            "Application_user": ["asda", "asdasd"], 
-            "max_people": 8, 
-            "userId": 2
-        },
-        {   
-            "User": {
-                "id": 3,
-                "accountId": "asd",
-                "nickname": "asdasd"
-            },
-            "id": 3,
-            "title": "title",
-            "category": "React",
-            "createdAt": "2021-07- 11T20:55:10.526Z",
-            "content": "공부할사람 모집합니다!",
-            "Application_user": ["asda", "asdasd"],
-            "max_people": 8, 
-            "userId": 3
-        }
-    ]
+  "Ad": [
+    {
+      "user": {
+        "id": 1,
+        "accountId": "asd",
+        "nickname": "qwe"
+      },
+      "id": 1,
+      "title": "title",
+      "category": "React",
+      "createdAt": "2021-07-  11T20:55:10.526Z",
+      "content": "공부할사람 모집합니다!",
+      "Application_user": [
+        "asda",
+        "asdasd"
+      ],
+      "max_people": 8,
+      "userId": 1
+    },
+    {
+      "user": {
+        "id": 2,
+        "accountId": "asd",
+        "nickname": "rty"
+      },
+      "id": 2,
+      "title": "title",
+      "category": "React",
+      "createdAt": "2021-07-  11T20:55:10.526Z",
+      "content": "공부할사람 모집합니다!",
+      "Application_user": [
+        "asda",
+        "asdasd"
+      ],
+      "max_people": 8,
+      "userId": 2
+    },
+    {
+      "user": {
+        "id": 3,
+        "accountId": "asd",
+        "nickname": "uio"
+      },
+      "id": 3,
+      "title": "title",
+      "category": "React",
+      "createdAt": "2021-07- 11T20:55:10.526Z",
+      "content": "공부할사람 모집합니다!",
+      "Application_user": [
+        "asda",
+        "asdasd"
+      ],
+      "max_people": 8,
+      "userId": 3
+    },
+    {
+      "user": {
+        "id": 5,
+        "accountId": "sdfg",
+        "nickname": "fgh"
+      },
+      "id": "aaa",
+      "category": "제목제목제목",
+      "content": "리액트모집합니다",
+      "max_people": "12",
+      "createdAt": "2021-07-12",
+      "Application_user": [
+        "asdasd",
+        "qweqweq"
+      ],
+      "title": "제목제목제목",
+      "userId": 4
+    },
+    {
+      "user": {
+        "id": 5,
+        "accountId": "sdfg",
+        "nickname": "fgh"
+      },
+      "id": "aaabbb",
+      "category": "dsadasdasd",
+      "content": "wqeqweqweq",
+      "max_people": "14",
+      "createdAt": "2021-07-12",
+      "Application_user": [
+        "asdasd",
+        "qweqweq"
+      ],
+      "title": "제목제목제목",
+      "userId": 4
+    }
+  ]
 }

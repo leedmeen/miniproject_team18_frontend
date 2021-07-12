@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../components/Footer"
 import Grid from "../element/Grid";
 import Header from '../components/Header';
@@ -10,8 +10,9 @@ const MainPage = (props) => {
     const dispatch = useDispatch()
     const ads_list = useSelector(state => state.ads.list)
     const {history} = props;
-
-    dispatch(adsActions.setAdsDB())
+    useEffect(() => {
+        dispatch(adsActions.setAdsDB());
+    }, []);
 
 
     return (
