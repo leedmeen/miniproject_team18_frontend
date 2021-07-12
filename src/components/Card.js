@@ -8,7 +8,6 @@ import {useSelector, useDispatch} from "react-redux";
 
 const Card = (props) => {
     const dispatch = useDispatch();
-    console.log(props)
     return (
         <React.Fragment>
                 <Grid _onClick={() => {history.push("/detail/:id")}}
@@ -24,5 +23,20 @@ const Card = (props) => {
     )
 }
 
+Card.defaultProps={
+    User: {
+        id: 1,
+        accountId: "asd",
+        nickname: "asdasd",
+    },
+    id: 2,
+    title: "프론트 모집",
+    category: "React",
+    createdAt: "2021-07- 11T20:55:10.526Z",
+    content: "공부할사람 모집합니다!",
+    Application_user: ["asda", "asdasd"],  //신청 유저목록(userid 또는 고유id)
+    max_people: 8,  //모집인원 수
+    userId: 2,
+}
 
 export default Card;

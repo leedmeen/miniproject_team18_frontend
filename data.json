@@ -89,6 +89,150 @@
       ],
       "title": "제목제목제목",
       "userId": 4
+    },
+    {
+      "user": {
+        "id": 5,
+        "accountId": "sdfg",
+        "nickname": "fgh"
+      },
+      "category": "asdasdasdsda",
+      "content": "asdasda",
+      "max_people": "12",
+      "createdAt": "2021-07-12",
+      "Application_user": [
+        "asdasd",
+        "qweqweq"
+      ],
+      "title": "제목제목제목",
+      "userId": 4,
+      "id": 4
+    },
+    {
+      "user": {
+        "id": 5,
+        "accountId": "sdfg",
+        "nickname": "fgh"
+      },
+      "id": 5,
+      "category": "asdasda",
+      "content": "dasdasd",
+      "max_people": "12",
+      "createdAt": "2021-07-12",
+      "Application_user": [
+        "asdasd",
+        "qweqweq"
+      ],
+      "title": "제목제목제목",
+      "userId": 4
+    },
+    {
+      "user": {
+        "id": 5,
+        "accountId": "sdfg",
+        "nickname": "fgh"
+      },
+      "id": 6,
+      "category": "title",
+      "content": "asdasd",
+      "max_people": "14",
+      "createdAt": "2021-07-12",
+      "Application_user": [
+        "asdasd",
+        "qweqweq"
+      ],
+      "title": "제목제목제목",
+      "userId": 4
+    },
+    {
+      "user": {
+        "id": 5,
+        "accountId": "sdfg",
+        "nickname": "fgh"
+      },
+      "id": "qqqqqqq",
+      "category": "qweqweqweqe",
+      "content": "qweqweqwe",
+      "max_people": "10",
+      "createdAt": "2021-07-12",
+      "Application_user": [
+        "asdasd",
+        "qweqweq"
+      ],
+      "title": "제목제목제목",
+      "userId": 4
+    },
+    {
+      "user": {
+        "id": 5,
+        "accountId": "sdfg",
+        "nickname": "fgh"
+      },
+      "id": "qweknklqwe",
+      "category": "qweqweqwe",
+      "content": "qweqweqweqweqwe",
+      "max_people": "10",
+      "createdAt": "2021-07-12",
+      "Application_user": [
+        "asdasd",
+        "qweqweq"
+      ],
+      "title": "제목제목제목",
+      "userId": 4
+    },
+    {
+      "user": {
+        "id": 5,
+        "accountId": "sdfg",
+        "nickname": "fgh"
+      },
+      "id": "qweknklqwqwee",
+      "category": "qweqwe",
+      "content": "qweqwe",
+      "max_people": "12",
+      "createdAt": "2021-07-12",
+      "Application_user": [
+        "asdasd",
+        "qweqweq"
+      ],
+      "title": "제목제목제목",
+      "userId": 4
+    },
+    {
+      "user": {
+        "id": 5,
+        "accountId": "sdfg",
+        "nickname": "fgh"
+      },
+      "id": "10",
+      "category": "asdasd",
+      "content": "asdasd",
+      "max_people": "12",
+      "createdAt": "2021-07-12",
+      "Application_user": [
+        "asdasd",
+        "qweqweq"
+      ],
+      "title": "제목제목제목",
+      "userId": 4
+    },
+    {
+      "user": {
+        "id": 5,
+        "accountId": "sdfg",
+        "nickname": "fgh"
+      },
+      "id": "11",
+      "category": "asdasd",
+      "content": "1231231",
+      "max_people": "18",
+      "createdAt": "2021-07-12",
+      "Application_user": [
+        "asdasd",
+        "qweqweq"
+      ],
+      "title": "제목제목제목",
+      "userId": 4
     }
   ]
 }

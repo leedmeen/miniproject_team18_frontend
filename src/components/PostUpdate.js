@@ -24,7 +24,7 @@ const PostUpdate = (props) => {
     const peopleInput = useRef(null);
     const addData = () => {
         const inputs = {
-        id: "aaabbb",
+        id: "11",
         category: categoryInput.current.value,
         content: contentInput.current.value,
         people: peopleInput.current.value,
