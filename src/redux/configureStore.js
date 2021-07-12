@@ -1,13 +1,13 @@
  import {createStore, combineReducers, applyMiddleware, compose} from "redux"
  import {createBrowserHistory} from "history";
  import {connectRouter} from "connected-react-router";
- import Post from "./modules/post"
+ import Ads from "./modules/ads"
  import thunk from "redux-thunk";
  
  export const history = createBrowserHistory();
 
  const rootReducer = combineReducers({
-     post: Post,
+     ads: Ads,
      router: connectRouter(history),
  });
 

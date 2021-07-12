@@ -1,0 +1,21 @@
+{
+    "posts":[
+        {
+            "title": "title",
+            "nickname": "aaaa",
+            "category": "React",
+            "createdAt": "2021-07-  11T20:55:10.526Z",
+            "content": "공부할사람 모집합니다!",
+            "postId": 1
+        }],
+
+    "comments":[
+        {
+            "id": 4,
+            "content": "공부할사람 모집합니다!",
+            "createdAt": "2021-07-  11T20:55:10.526Z",
+            "userId": 1,
+            "adId": 1
+        }
+    ]
+}
