@@ -10,7 +10,7 @@ const Header = (props) => {
     <React.Fragment>
       <Grid is_right>
         <Menu>알림</Menu>
-        <Menu>로그인</Menu>
+        <Menu onClick={() => { history.push('/login')}}>로그인</Menu>
         <Menu>회원가입</Menu>
       </Grid>
       <LogoBox>

@@ -26,8 +26,6 @@ const Post = (props) => {
   return (
     <React.Fragment>
       <Grid is_center padding='5vh 3vw 3vh 3vw'>
-          <Text bold size='4vh'>{props.props.title}</Text>
-            {/* {props.props.title} */}
           <Text bold size='4vh'>{title}</Text>
         </Grid>
         <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '2vh'}}>
