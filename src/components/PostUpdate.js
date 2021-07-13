@@ -21,9 +21,11 @@ const PostUpdate = (props) => {
     const categoryInput = useRef(null);
     const contentInput = useRef(null);
     const peopleInput = useRef(null);
+    const titleInput = useRef(null);
     const addData = () => {
         const inputs = {
         id: props.id,
+        title: titleInput.current.value,
         category: categoryInput.current.value,
         content: contentInput.current.value,
         people: peopleInput.current.value,
@@ -49,6 +51,7 @@ const PostUpdate = (props) => {
                     id="outlined-multiline-static"
                     label="게시글 제목을 입력하세요"
                     color="secondary"
+                    inputRef={titleInput}
                     multiline
                     rows={4}
                     fullWidth="True"

@@ -9,8 +9,8 @@ import "../share/postStyle.css";
 import { CSSTransitionGroup } from 'react-transition-group'
 
 const MainPage = (props) => {
-    const dispatch = useDispatch()
-    const ads_list = useSelector(state => state.ads.list)
+    const dispatch = useDispatch();
+    const ads_list = useSelector(state => state.ads.list);
     const {history} = props;
     useEffect(() => {
         dispatch(adsActions.setAdsDB());

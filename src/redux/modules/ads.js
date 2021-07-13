@@ -11,10 +11,10 @@ const EDIT_ADS = "EDIT_ADS"
 
 const setAds = createAction(SET_ADS, (ads_list)=> ({ads_list}));
 const addAds = createAction(ADD_ADS, (ads_list)=> ({ads_list}));
-const editAds = createAction(EDIT_ADS, (ads_list, id)=> ({ads_list, id}))
-const deelete = createAction(DELETE, (id) => ({id}))
+const editAds = createAction(EDIT_ADS, (ads_list, id)=> ({ads_list, id}));
+const deleteAds = createAction(DELETE, (id) => ({id}));
 
-const setAdsDB = ()=> {
+const setAdsDB = ()=> {    //게시글들 불러오는 액션함수
     return function(dispatch){
         const axios = require("axios");
         axios.get("http://15.165.18.118/ads").then(function(response){
@@ -24,71 +24,65 @@ const setAdsDB = ()=> {
         })
     }
 }
-const addAdsDB = (inputs) => {
+const addAdsDB = (inputs) => {   //게시글 추가하는함수
     return function(dispatch, getState){
         const axios = require("axios");
-        axios.post("http://localhost:4000/Ad", 
+        axios.post("http://15.165.18.118/ads", 
         {  
             category: inputs.category,
             content: inputs.content,
             maxPeople: inputs.people,
-            createdAt: "2021-07-12",
+            createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             host: "tester",
-            title: "제목제목제목"}).then(function(response){
+            title: inputs.title}).then(function(response){
             dispatch(addAds(response))
         })
     }
 }
-const editAdsDB = (inputs) => {
+const editAdsDB = (inputs) => {   //게시글 수정하는함수
     return function(dispatch, getState){
         const axios = require("axios");
-        axios.put(`http://localhost:4000/Ad/${inputs.id}`,
-        {   user:{
-            id: 5,
-            accountId: "sdfg",
-            nickname: "fgh",
-            },
+        axios.put(`http://15.165.18.118/ads/${inputs.id}`,   //id는 현재 들어가있는 게시글의 id
+        {   id: inputs.id,
             category: inputs.category,
             content: inputs.content,
             maxPeople: inputs.people,
-            createdAt: "2021-07-12",
-            Application_user: ["asdasd","qweqweq"],
-            title: "제목제목제목"}).then(function(response){
+            host: "tester",
+            createdAt: moment().format("YYYY-MM-DDThh:mm:ss.000z"),
+            title: "TESTTEST"}).then(function(response){
                 dispatch(editAds(response, inputs.id))
             })
+    }
+}
+const deleteAdsDB = (id) => {
+    return function(dispatch){
+        const axios = require("axios");
+        axios.delete(`http://15.165.18.118/ads/${id}`).then(function(response){
+            dispatch(deleteAds(response))
+        })
     }
 }
 
 
 const initialState = {
-    list: [{
-        User: {
-            id: 1,
-            accountId: "asd",
-            nickname: "asdasd",
-        },
-        title: "프론트 모집",
-        category: "React",
-        createdAt: "2021-07- 11T20:55:10.526Z",
-        content: "공부할사람 모집합니다!",
-        Application_user: ["asda", "asdasd"],  //신청 유저목록(userid 또는 고유id)
-        max_people: 8,  //모집인원 수
-        userId: 2,
-    }],
+    list: [],
 }
 
 export default handleActions(
     {
         [SET_ADS]: (state, action) => produce(state, (draft) => {
-            draft.list = [...action.payload.ads_list];
+            draft.list = [...action.payload.ads_list];     //게시글 데이터를 전부 불러서 배열에 등록
         }),
-        [ADD_ADS]: (state, action) => produce(state, (draft)=> {
+        [ADD_ADS]: (state, action) => produce(state, (draft)=> {    //추가된 게시글 데이터 배열에 추가
             // let idx = draft.list.findIndex((p) => p.id === action.payload.ads_list);
             draft.list.unshift(action.payload.response)
         }),
-        [EDIT_ADS]: (state, action) => produce(state, (draft)=> {
+        [EDIT_ADS]: (state, action) => produce(state, (draft)=> {    
             // draft.list[action.payload.ads_list.id] =  action.payload.ads_list.data;
-        })
+        }),
+        [DELETE]: (state, action) => produce(state, (draft) => {
+
+        }),
     },
     initialState
 );
@@ -96,10 +90,12 @@ export default handleActions(
 const actionCreators = {
     setAds,
     addAds,
-    // addAdsDB,
+    addAdsDB,
     setAdsDB,
-    // editAdsDB,
-    // editAds,
+    editAdsDB,
+    editAds,
+    deleteAds,
+    deleteAdsDB,
 }
 
 export { actionCreators };
