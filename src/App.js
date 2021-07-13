@@ -21,7 +21,7 @@ function App() {
       <GlobalStyle/>
       <ConnectedRouter history={history}>
         <Route path="/" exact component={MainPage}/>
-        <Route path="/detail" exact component={DetailPage}/>
+        <Route path="/detail/:adId" exact component={DetailPage}/>
         <Route path="/ads" exact component={PostWrite}/>
       </ConnectedRouter>
     </React.Fragment>

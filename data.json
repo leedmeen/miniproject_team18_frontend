@@ -1,48 +1,58 @@
 {
-    "Ad":[
+    "ads":[
         {   
-            "User": {
-                "id": 1,
-                "accountId": "asd",
-                "nickname": "asdasd"
-            },
             "id": 1,
             "title": "title",
             "category": "React",
             "createdAt": "2021-07-  11T20:55:10.526Z",
             "content": "공부할사람 모집합니다!",
-            "Application_user": ["asda", "asdasd"], 
-            "max_people": 8, 
-            "userId": 1
+            "participant": ["asda", "asdasd"], 
+            "maxPeople": 8, 
+            "userId": 1,
+            "comments": [
+                {
+                    "id": 1,
+                    "content": "내용1-1",
+                    "createdAt": "2021-07-01 11T20:55:10.526Z",
+                    "userId": 1,
+                    "adId": 1
+                },
+                {
+                    "id": 2,
+                    "content": "내용1-2",
+                    "createdAt": "2021-07-01 11T20:55:10.526Z",
+                    "userId": 1,
+                    "adId": 1
+                }
+            ]
         },
         {   
-            "User": {
-                "id": 2,
-                "accountId": "asd",
-                "nickname": "asdasd"
-            },
             "id": 2,
             "title": "title",
             "category": "React",
             "createdAt": "2021-07-  11T20:55:10.526Z",
             "content": "공부할사람 모집합니다!",
-            "Application_user": ["asda", "asdasd"], 
-            "max_people": 8, 
-            "userId": 2
+            "participant": ["asda", "asdasd"], 
+            "maxPeople": 8, 
+            "userId": 2,
+            "comments": [
+                {
+                    "id": 3,
+                    "content": "내용2-1",
+                    "createdAt": "2021-07-01 11T20:55:10.526Z",
+                    "userId": 2,
+                    "adId": 2
+                }
+            ]            
         },
         {   
-            "User": {
-                "id": 3,
-                "accountId": "asd",
-                "nickname": "asdasd"
-            },
             "id": 3,
             "title": "title",
             "category": "React",
             "createdAt": "2021-07- 11T20:55:10.526Z",
             "content": "공부할사람 모집합니다!",
-            "Application_user": ["asda", "asdasd"],
-            "max_people": 8, 
+            "participant": ["asda", "asdasd"],
+            "maxPeople": 8, 
             "userId": 3
         }
     ]
