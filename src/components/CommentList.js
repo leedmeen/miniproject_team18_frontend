@@ -12,8 +12,8 @@ const CommentList = (props) => {
 
   const deleteComment = (adId, id) => {
     dispatch(commentActions.deleteCommentDB(adId, id));
+    console.log(adId, id);
   }
-
   return (
     <React.Fragment>
       {props.props.map((c) => {

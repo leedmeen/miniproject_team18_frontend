@@ -31,7 +31,6 @@ const initialComment = {
 const setCommentDB = (id) => {
   return function (dispatch, getState, {history}) {
     instance.get(`/ads/${id}/comments`).then(function(response) {
-          // console.log(response.data.comments);
           dispatch(setComment(response.data));
         }).catch(function (err) {
           console.log(err);
@@ -39,34 +38,41 @@ const setCommentDB = (id) => {
   };
 };
 
-// const addCommentDB = (comment) => {             // 404 에러가 뜸...ㅠ뭐가 문제죠 
-//   return function (dispatch, getState, {history}) {
-//     instance.post(`/ads/${comment.adId}/comments`, 
-//     {comments: `{adId: ${comment.adId}, 
-//     content: ${comment.content}, 
-//     userId: ${comment.userId}}`}).then(function(response) {
-//       console.log(response.data);
-//       dispatch(addComment(comment));
-//       }).catch(function (err) {
-//       console.log(err);
-//     })
-//   }
-// };
+const addCommentDB = (comment) => {             // 404 에러가 뜸...ㅠ뭐가 문제죠 
+  return function (dispatch) {
+    const axios = require("axios");
+    const id = parseInt(comment.id);
+    const user_id = parseInt(comment.userId);
+    axios.post(`http://15.165.18.118/ads/${id}/comments`, 
+    { 
+      content: comment.content,
+      adId: id,
+      userId: user_id,
+    }).catch(function (error){
+        console.log(error);
+      }).then(function(response) {
+        console.log(response);
+      dispatch(addComment(response.data));
+      })
+  }
+};
 // const editCommentDB = () => {
 //   return function (dispatch) {
-    
+//     instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response){
+
+//     }).catch
+
 //   };
 // };
-// const deleteCommentDB = (adId, commentId) => {
-//   return function (dispatch) {
-//     instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response) {
-//       console.log(response);
-//       dispatch(deleteComment(response.data));
-//     }).catch(function(err) {
-//       console.log(err);
-//     })
-//   };
-// };
+const deleteCommentDB = (adId, commentId) => {
+  return function (dispatch) {
+    instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response) {
+      dispatch(deleteComment(response.data));
+    }).catch(function(err) {
+      console.log(err);
+    })
+  };
+};
 
 // Reducer
 export default handleActions(
@@ -89,9 +95,10 @@ export default handleActions(
 
 // Action creator export
 const actionCreators = {
+  addComment,
   setCommentDB,
-  // addCommentDB,
-  // deleteCommentDB,
+  addCommentDB,
+  deleteCommentDB,
 };
 
 export { actionCreators };
