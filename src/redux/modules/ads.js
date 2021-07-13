@@ -70,6 +70,17 @@ const deleteAdsDB = (id) => {
 }
 
 
+const setOneAdDB = (id) => {
+    return function(dispatch, getState) {
+        const axios = require('axios');
+        axios.get("http://15.165.18.118/ads").then(function(response){
+            dispatch(setAds(response.data));
+        }).catch(function(error) {
+            console.log(error);
+        })
+    }
+}
+
 const initialState = {
     list: [],
 }
@@ -100,6 +111,7 @@ const actionCreators = {
     setAdsDB,
     editAdsDB,
     editAds,
+    setOneAdDB,
     deleteAds,
     deleteAdsDB,
 }

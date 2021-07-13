@@ -81,6 +81,9 @@ const Btn = styled.button`
   left: ${(props) => props.left};
   bottom: ${(props) => props.bottom};
   cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 export default Button;
