@@ -31,43 +31,42 @@ const initialComment = {
 const setCommentDB = (id) => {
   return function (dispatch, getState, {history}) {
     instance.get(`/ads/${id}/comments`).then(function(response) {
-          console.log(response.data);
-          // dispatch(setComment(response.data.comments));
+          // console.log(response.data.comments);
+          dispatch(setComment(response.data));
         }).catch(function (err) {
           console.log(err);
         })
   };
 };
 
-const addCommentDB = (comment) => {             // 404 에러가 뜸...ㅠ뭐가 문제죠 
-  return function (dispatch, getState, {history}) {
-    instance.post(`/ads/${comment.adId}/comments`,
-    {content: comment.content,
-    userId: comment.userId,
-    adId: comment.adId
-    }).then(function(response) {
-      console.log(response.data);
-      // dispatch(addComment(comment));
-      }).catch(function (err) {
-      console.log(err);
-    })
-  }
-};
-const editCommentDB = () => {
-  return function (dispatch) {
+// const addCommentDB = (comment) => {             // 404 에러가 뜸...ㅠ뭐가 문제죠 
+//   return function (dispatch, getState, {history}) {
+//     instance.post(`/ads/${comment.adId}/comments`, 
+//     {comments: `{adId: ${comment.adId}, 
+//     content: ${comment.content}, 
+//     userId: ${comment.userId}}`}).then(function(response) {
+//       console.log(response.data);
+//       dispatch(addComment(comment));
+//       }).catch(function (err) {
+//       console.log(err);
+//     })
+//   }
+// };
+// const editCommentDB = () => {
+//   return function (dispatch) {
     
-  };
-};
-const deleteCommentDB = (adId, commentId) => {
-  return function (dispatch) {
-    instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response) {
-      console.log(response);
-      dispatch(deleteComment(response.data));
-    }).catch(function(err) {
-      console.log(err);
-    })
-  };
-};
+//   };
+// };
+// const deleteCommentDB = (adId, commentId) => {
+//   return function (dispatch) {
+//     instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response) {
+//       console.log(response);
+//       dispatch(deleteComment(response.data));
+//     }).catch(function(err) {
+//       console.log(err);
+//     })
+//   };
+// };
 
 // Reducer
 export default handleActions(
@@ -91,8 +90,8 @@ export default handleActions(
 // Action creator export
 const actionCreators = {
   setCommentDB,
-  addCommentDB,
-  deleteCommentDB,
+  // addCommentDB,
+  // deleteCommentDB,
 };
 
 export { actionCreators };

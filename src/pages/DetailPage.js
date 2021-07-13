@@ -18,7 +18,6 @@ const DetailPage = (props) => {
   const ad = ad_list.find((ad) => ad.id == id);
   const comment_list = useSelector((state) => state.comment.list);
   const comment_found = comment_list.filter(comment => comment.adId == id);
-
   useEffect(() => {
     dispatch(commentActions.setCommentDB(id));
     if (ad) {

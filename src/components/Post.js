@@ -4,8 +4,9 @@ import Text from '../element/Text';
 import Button from '../element/Button';
 import Input from '../element/Input';
 import styled from 'styled-components';
-import { Divider, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { actionCreators as commentActions } from '../redux/modules/comment';
+import { actionCreators as adsActions } from '../redux/modules/ads';
 import { useDispatch} from 'react-redux';
 import {history} from "../redux/configureStore";
 
@@ -19,7 +20,6 @@ const Post = (props) => {
       userId: 99,
       adId: id
     }
-    // console.log(comment);
     dispatch(commentActions.addCommentDB(comment));
   };
 
@@ -52,7 +52,11 @@ const Post = (props) => {
                 _onClick={()=> {
                   history.push(`/ads/${id}`)
                 }}></Button>
-              <Button width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' fontWeight='bold' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제'></Button>
+              <Button _onClick={()=> {
+                dispatch(adsActions.deleteAdsDB(id));
+                history.push("/");
+              }} 
+              width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' fontWeight='bold' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제'></Button>
             </div>
           </div>
         <Grid is_center margin_top='1vh'>
