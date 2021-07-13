@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState} from 'react';
 import Text from '../element/Text';
 import Button from '../element/Button';
 import styled from 'styled-components';
@@ -8,7 +8,6 @@ import { actionCreators as commentActions } from '../redux/modules/comment';
 
 const CommentList = (props) => {
   const dispatch = useDispatch();
-  // console.log(props);
 
   const deleteComment = (adId, id) => {
     dispatch(commentActions.deleteCommentDB(adId, id));

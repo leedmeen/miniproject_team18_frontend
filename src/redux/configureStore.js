@@ -5,14 +5,13 @@ import Ads from "./modules/ads";
 import Comment from './modules/comment';
 import thunk from "redux-thunk";
 
-export const history = createBrowserHistory();
+export const history = createBrowserHistory({forceRefresh: true});
 
 const rootReducer = combineReducers({
     ads: Ads,
     comment: Comment,
     router: connectRouter(history),
 });
-
 const middlewares = [thunk.withExtraArgument({history:history})];
 
 const env = process.env.NODE_ENV;

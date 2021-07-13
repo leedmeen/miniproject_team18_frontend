@@ -63,7 +63,7 @@ const Post = (props) => {
           <Input type='text' _ref={comment_ref} placeholder='댓글을 입력해 주세요' width='60vw' height='3vh' fontSize='1.5vh' border='1px solid rgba(232, 52, 78, 0.4)' borderRadius='0.8vw' padding='0 0 0 1vw'></Input>
           <Button type='submit' _onClick={()=> {
             addComment();
-            history.replace(`/detail/${id}`);
+            history.push(`/detail/${id}`);
             }} width='60px' height='3.5vh' color='white' border='none' borderTRRadius='2vh' borderBRRadius='2vh' borderTLRadius='0.5vh' borderBLRadius='0.5vh' fontWeight='bold' backgroundColor='#E8344E' text='확인' margin='0 0 0 -3.0vw'></Button>
         </Grid>
     </React.Fragment>
