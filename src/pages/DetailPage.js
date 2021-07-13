@@ -9,18 +9,22 @@ import "../share/postStyle.css";
 import { CSSTransitionGroup } from 'react-transition-group';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as commentActions } from '../redux/modules/comment';
+import { actionCreators as adsActions } from '../redux/modules/ads';
 
 const DetailPage = (props) => {
   const dispatch = useDispatch();
-  const id = props.match.params.id;
+  const id = window.location.pathname.split('/detail/')[1];
   const ad_list = useSelector((state) => state.ads.list);
   const ad = ad_list.find((ad) => ad.id == id);
   const comment_list = useSelector((state) => state.comment.list);
   const comment_found = comment_list.filter(comment => comment.adId == id);
-  // console.log(comment_list);
 
   useEffect(() => {
     dispatch(commentActions.setCommentDB(id));
+    if (ad) {
+      return;
+    }
+    dispatch(adsActions.setOneAdDB(id));
   }, []);
 
   return (
@@ -34,7 +38,7 @@ const DetailPage = (props) => {
       <Grid mh="100vh">
         <Header/>
         <Card>
-          <Post props={ad} comment_num={comment_found.length} id={id}/>
+          <Post {...ad} comment_num={comment_found.length} id={id}/>
           <CommentList props={comment_found}/>
         </Card>
       </Grid>

@@ -16,7 +16,7 @@ const editAds = createAction(EDIT_ADS, (ads_list, id)=> ({ads_list, id}))
 const setAdsDB = ()=> {
     return function(dispatch){
         const axios = require("axios");
-        axios.get("http://localhost:4000/Ad").then(function(response){
+        axios.get("http://15.165.18.118/ads").then(function(response){
             dispatch(setAds(response.data))
         }).catch(function(error) {
             console.log(error);
@@ -26,7 +26,7 @@ const setAdsDB = ()=> {
 const addAdsDB = (inputs) => {
     return function(dispatch, getState){
         const axios = require("axios");
-        axios.post("http://localhost:4000/Ad", 
+        axios.post("http://15.165.18.118/ads", 
         {user:{
             id: 5,
             accountId: "sdfg",
@@ -62,6 +62,17 @@ const editAdsDB = (inputs) => {
             title: "제목제목제목",
             userId: 4}).then(function(response){
             })
+    }
+}
+
+const setOneAdDB = (id) => {
+    return function(dispatch, getState) {
+        const axios = require('axios');
+        axios.get("http://15.165.18.118/ads").then(function(response){
+            dispatch(setAds(response.data));
+        }).catch(function(error) {
+            console.log(error);
+        })
     }
 }
 
@@ -105,6 +116,7 @@ const actionCreators = {
     setAdsDB,
     editAdsDB,
     editAds,
+    setOneAdDB,
 }
 
 export { actionCreators };

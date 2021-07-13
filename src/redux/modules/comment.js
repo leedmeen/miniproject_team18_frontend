@@ -30,9 +30,9 @@ const initialComment = {
 // Middleware actions
 const setCommentDB = (id) => {
   return function (dispatch, getState, {history}) {
-    instance.get(`/ads/${id}`).then(function(response) {
-          // console.log(response.data.comments);
-          dispatch(setComment(response.data.comments));
+    instance.get(`/ads/${id}/comments`).then(function(response) {
+          console.log(response.data);
+          // dispatch(setComment(response.data.comments));
         }).catch(function (err) {
           console.log(err);
         })
@@ -41,9 +41,13 @@ const setCommentDB = (id) => {
 
 const addCommentDB = (comment) => {             // 404 에러가 뜸...ㅠ뭐가 문제죠 
   return function (dispatch, getState, {history}) {
-    instance.post(`/ads/${comment.adId}/comments`, {comments: `{adId: ${comment.adId}, content: ${comment.content}, userId: ${comment.userId}}`}).then(function(response) {
+    instance.post(`/ads/${comment.adId}/comments`,
+    {content: comment.content,
+    userId: comment.userId,
+    adId: comment.adId
+    }).then(function(response) {
       console.log(response.data);
-      dispatch(addComment(comment));
+      // dispatch(addComment(comment));
       }).catch(function (err) {
       console.log(err);
     })
