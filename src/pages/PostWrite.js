@@ -7,7 +7,6 @@ import "../share/postStyle.css";
 import { CSSTransitionGroup } from 'react-transition-group'
 
 const PostWrite = (props) => {
-    console.log(props);
     return(
         <CSSTransitionGroup
             transitionName="worksTransition"

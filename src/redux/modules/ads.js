@@ -12,11 +12,12 @@ const EDIT_ADS = "EDIT_ADS"
 const setAds = createAction(SET_ADS, (ads_list)=> ({ads_list}));
 const addAds = createAction(ADD_ADS, (ads_list)=> ({ads_list}));
 const editAds = createAction(EDIT_ADS, (ads_list, id)=> ({ads_list, id}))
+const deelete = createAction(DELETE, (id) => ({id}))
 
 const setAdsDB = ()=> {
     return function(dispatch){
         const axios = require("axios");
-        axios.get("http://localhost:4000/Ad").then(function(response){
+        axios.get("http://15.165.18.118/ads").then(function(response){
             dispatch(setAds(response.data))
         }).catch(function(error) {
             console.log(error);
@@ -27,19 +28,13 @@ const addAdsDB = (inputs) => {
     return function(dispatch, getState){
         const axios = require("axios");
         axios.post("http://localhost:4000/Ad", 
-        {user:{
-            id: 5,
-            accountId: "sdfg",
-            nickname: "fgh",
-            },
-            id: inputs.id,
+        {  
             category: inputs.category,
             content: inputs.content,
-            max_people: inputs.people,
+            maxPeople: inputs.people,
             createdAt: "2021-07-12",
-            Application_user: ["asdasd","qweqweq"],
-            title: "제목제목제목",
-            userId: 4}).then(function(response){
+            host: "tester",
+            title: "제목제목제목"}).then(function(response){
             dispatch(addAds(response))
         })
     }
@@ -47,7 +42,6 @@ const addAdsDB = (inputs) => {
 const editAdsDB = (inputs) => {
     return function(dispatch, getState){
         const axios = require("axios");
-        console.log(inputs);
         axios.put(`http://localhost:4000/Ad/${inputs.id}`,
         {   user:{
             id: 5,
@@ -56,14 +50,15 @@ const editAdsDB = (inputs) => {
             },
             category: inputs.category,
             content: inputs.content,
-            max_people: inputs.people,
+            maxPeople: inputs.people,
             createdAt: "2021-07-12",
             Application_user: ["asdasd","qweqweq"],
-            title: "제목제목제목",
-            userId: 4}).then(function(response){
+            title: "제목제목제목"}).then(function(response){
+                dispatch(editAds(response, inputs.id))
             })
     }
 }
+
 
 const initialState = {
     list: [{
@@ -92,7 +87,7 @@ export default handleActions(
             draft.list.unshift(action.payload.response)
         }),
         [EDIT_ADS]: (state, action) => produce(state, (draft)=> {
-
+            // draft.list[action.payload.ads_list.id] =  action.payload.ads_list.data;
         })
     },
     initialState
@@ -101,10 +96,10 @@ export default handleActions(
 const actionCreators = {
     setAds,
     addAds,
-    addAdsDB,
+    // addAdsDB,
     setAdsDB,
-    editAdsDB,
-    editAds,
+    // editAdsDB,
+    // editAds,
 }
 
 export { actionCreators };

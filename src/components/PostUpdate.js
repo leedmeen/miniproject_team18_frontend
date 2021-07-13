@@ -28,15 +28,20 @@ const PostUpdate = (props) => {
         content: contentInput.current.value,
         people: peopleInput.current.value,
     }
+    console.log(props)
+    if(props.id){
         dispatch(adsActions.editAdsDB(inputs))
-        history.goBack();
+    }else{
+        dispatch(adsActions.addAdsDB(inputs))
+    }
+        history.push("/");
     }
 
 
 
     return (
         <React.Fragment>
-            <Grid is_center bg="#ffffff" margin="20px 0 20px 0" dp="flex"><Text size="2.0em">제목</Text></Grid>
+            <Grid is_center bg="#ffffff" margin="20px 0 20px 0" dp="flex"></Grid>
                 <Grid box_shadow="0 4px 25px 0 rgb(0 0 0 /15%)" br="40px" margin="0 auto" width="80%" dp="flex" fd="column" is_center>
                 <Grid width="60wv" padding="5px 30px 20px 30px">
                 <Text size="1.3em" color="#3E373A">게시글 제목</Text>

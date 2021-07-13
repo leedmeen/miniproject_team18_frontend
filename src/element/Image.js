@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Image = (props) => {
-    const {size, src} = props;
+    const {size, src, _onClick} = props;
 
     const styles = {
         src: src,
@@ -10,7 +10,7 @@ const Image = (props) => {
     }
     return(
         <React.Fragment>
-            <FooterImage {...styles}></FooterImage>
+            <FooterImage {...styles} onClick={_onClick}></FooterImage>
         </React.Fragment>
     )
 }
@@ -18,6 +18,7 @@ const Image = (props) => {
 Image.defaultProps = {
     src: "",
     size: false,
+    _onClick: () => {},
 }
 
 const FooterImage = styled.div`
