@@ -36,7 +36,7 @@ const PostUpdate = (props) => {
     }else{
         dispatch(adsActions.addAdsDB(inputs))
     }
-        history.push("/");
+        history.push("/", null);
     }
 
 

@@ -44,7 +44,7 @@ const addCommentDB = (comment) => {             // 404 에러가 뜸...ㅠ뭐가
     const id = parseInt(comment.id);
     const user_id = parseInt(comment.userId);
     axios.post(`http://15.165.18.118/ads/${id}/comments`, 
-    { 
+    {
       content: comment.content,
       adId: id,
       userId: user_id,

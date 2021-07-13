@@ -4,11 +4,13 @@ import DetailPage from './pages/DetailPage';
 import { history } from "./redux/configureStore";
 import {BrowserRouter, Route} from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
+import {Router} from "react-router";
 import {createGlobalStyle} from "styled-components";
 
 import MainPage from "./pages/MainPage";
 import PostWrite from "./pages/PostWrite";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -20,13 +22,14 @@ function App() {
   return (
     <React.Fragment>
       <GlobalStyle/>
-      <ConnectedRouter history={history}>
+      <Router history={history}>
         <Route path="/" exact component={MainPage}/>
         <Route path="/detail/:id" exact component={DetailPage}/>
         <Route path="/ads/:id" exact component={PostWrite}/>
         <Route path="/ads" exact component={PostWrite}/>
         <Route path="/login" exact component={Login}/>
-      </ConnectedRouter>
+        <Route path="/signup" exact component={Signup}/>
+      </Router>
     </React.Fragment>
   );
 }
