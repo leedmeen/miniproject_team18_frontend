@@ -7,10 +7,11 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import { actionCreators as commentActions } from '../redux/modules/comment';
 import { useDispatch } from 'react-redux';
+import {history} from "../redux/configureStore"
 
 const Post = (props) => {
   const dispatch = useDispatch();
-  const id = props.adId;
+  const id = props.id;
   const comment_ref = React.useRef();
   const addComment = () => {
     const comment = {
@@ -45,7 +46,10 @@ const Post = (props) => {
               <Text size='1.8vh' color='#E8344E' bold>댓글 {props.props.comments.length}개</Text>
             </div>
             <div>
-              <Button width='60px' height='3vh' backgroundColor='#E8344E' color='white' border='none' borderTLRadius='1vh' borderBLRadius='1vh' fontWeight='bold' text='수정'></Button>
+              <Button width='60px' height='3vh' backgroundColor='#E8344E' color='white' border='none' borderTLRadius='1vh' borderBLRadius='1vh' fontWeight='bold' text='수정'
+                _onClick={()=> {
+                  history.push(`/ads/${props.id}`)
+                }}></Button>
               <Button width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' fontWeight='bold' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제'></Button>
             </div>
           </div>

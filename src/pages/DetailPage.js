@@ -12,7 +12,7 @@ import { actionCreators as commentActions } from '../redux/modules/comment';
 
 const DetailPage = (props) => {
   const dispatch = useDispatch();
-  const id = props.match.params.adId;
+  const id = props.match.params.id;
   const ad_list = useSelector((state) => state.ads.list);
   const ad = ad_list.find((ad) => ad.id == id);
   const comment_list = useSelector((state) => state.comment.list);
@@ -34,7 +34,7 @@ const DetailPage = (props) => {
       <Grid mh="100vh">
         <Header/>
         <Card>
-          <Post props={ad} comment_num={comment_found.length} adId={id}/>
+          <Post props={ad} comment_num={comment_found.length} id={id}/>
           <CommentList props={comment_found}/>
         </Card>
       </Grid>

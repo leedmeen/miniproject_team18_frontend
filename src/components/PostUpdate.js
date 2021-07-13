@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import Grid from "../element/Grid";
 import Text from "../element/Text";
 import Input from "../element/Input"
@@ -6,28 +6,31 @@ import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
 import NavigationIcon from '@material-ui/icons/Navigation';
+import { useDispatch } from "react-redux";
+import {actionCreators as adsActions} from "../redux/modules/ads";
+import {history} from "../redux/configureStore";
 
 const PostUpdate = (props) => {
-    
-const useStyles = makeStyles((theme) => ({
-margin: {
-    margin: theme.spacing(3),
-},
-}));
-const classes = useStyles();
-
-const categoryInput = useRef(null);
-const contentInput = useRef(null);
-const peopleInput = useRef(null);
-const addData = () => {
-const inputs = {
-    id: "abc",
-    category: categoryInput.current.value,
-    content: contentInput.current.value,
-    people: peopleInput.current.value,
-}
-console.log(inputs)
-}
+    const dispatch = useDispatch();
+    const useStyles = makeStyles((theme) => ({
+    margin: {
+        margin: theme.spacing(3),
+    },
+    }));
+    const classes = useStyles();
+    const categoryInput = useRef(null);
+    const contentInput = useRef(null);
+    const peopleInput = useRef(null);
+    const addData = () => {
+        const inputs = {
+        id: props.id,
+        category: categoryInput.current.value,
+        content: contentInput.current.value,
+        people: peopleInput.current.value,
+    }
+        dispatch(adsActions.editAdsDB(inputs))
+        history.goBack();
+    }
 
 
 
@@ -36,14 +39,13 @@ console.log(inputs)
             <Grid is_center bg="#ffffff" margin="20px 0 20px 0" dp="flex"><Text size="2.0em">제목</Text></Grid>
                 <Grid box_shadow="0 4px 25px 0 rgb(0 0 0 /15%)" br="40px" margin="0 auto" width="80%" dp="flex" fd="column" is_center>
                 <Grid width="60wv" padding="5px 30px 20px 30px">
-                <Text size="1.3em" color="#3E373A">게시글 내용</Text>
+                <Text size="1.3em" color="#3E373A">게시글 제목</Text>
                 <TextField
                     id="outlined-multiline-static"
-                    label="게시글 내용을 입력하세요"
+                    label="게시글 제목을 입력하세요"
                     color="secondary"
                     multiline
                     rows={4}
-                    defaultValue=""
                     fullWidth="True"
                     variant="outlined"
                     />
@@ -74,9 +76,16 @@ console.log(inputs)
                     />
                 </Grid>
                 <Text size="1.3em" color="#3E373A">모집인원</Text>
-                <Grid width="60wv" padding="5px 0 20px 0">
-                <Input borderRadius="5px" border="2px solid #3E373A"
-                width="5%" height="20px" ref={peopleInput}></Input><Text size="1.3em" color="#3E373A">명</Text>
+                <Grid width="30wv" padding="5px 0 20px 0" is_center>
+                <TextField
+                    id="standard-textarea"
+                    label="인원수 입력"
+                    color="secondary"
+                    size="small"
+                    inputRef={peopleInput}
+                    variant="outlined"
+                    multiline
+                    />
                 </Grid>
                 <Grid is_center>
                     <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}
