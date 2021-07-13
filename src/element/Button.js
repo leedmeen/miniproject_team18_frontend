@@ -40,12 +40,12 @@ Button.defaultProps = {
   color: null,
   fontSize: null,
   fontWeight: null,
-  border: null,
+  border: 'none',
   borderRadius: null,
   borderTLRadius: null,     // borderTopLeftRadius
-  borderTRRadius: null,
-  borderBLRadius: null,
-  borderBRRadius: null,
+  borderTRRadius: null,     // borderTopRightRadius
+  borderBLRadius: null,     // borderBottomLeftRadius
+  borderBRRadius: null,     // borderBottomRightRadius
   width: null,
   maxWidth: null,
   height: null,
