@@ -8,6 +8,7 @@ import {createGlobalStyle} from "styled-components";
 
 import MainPage from "./pages/MainPage";
 import PostWrite from "./pages/PostWrite";
+import Login from "./pages/Login";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/detail/:id" exact component={DetailPage}/>
         <Route path="/ads/:id" exact component={PostWrite}/>
         <Route path="/ads" exact component={PostWrite}/>
+        <Route path="/login" exact component={Login}/>
       </ConnectedRouter>
     </React.Fragment>
   );

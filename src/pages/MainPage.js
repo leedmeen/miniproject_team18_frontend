@@ -27,7 +27,7 @@ const MainPage = (props) => {
         >
                 <Header></Header>
             <Grid display="flex" fd="column" mh="100vh">
-            <Grid is_center >
+            <Grid is_center>
                 <Grid margin="0 auto" color="white" br="40px"padding="10px" width="200px" height="40px" bg="rgb(232, 52, 78)" _onClick={() => {history.push("/ads")}} hover={'cursor: pointer;'}>
                  게시글 추가하기</Grid>
                  {ads_list && ads_list.map((p, idx)=> {

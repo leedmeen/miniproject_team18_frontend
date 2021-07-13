@@ -36,6 +36,8 @@ const addAdsDB = (inputs) => {   //게시글 추가하는함수
             host: "tester",
             title: inputs.title}).then(function(response){
             dispatch(addAds(response))
+        }).catch(function(error) {
+            console.log(error);
         })
     }
 }
@@ -51,6 +53,8 @@ const editAdsDB = (inputs) => {   //게시글 수정하는함수
             createdAt: moment().format("YYYY-MM-DDThh:mm:ss.000z"),
             title: "TESTTEST"}).then(function(response){
                 dispatch(editAds(response, inputs.id))
+            }).catch(function(error) {
+                console.log(error);
             })
     }
 }
@@ -59,6 +63,8 @@ const deleteAdsDB = (id) => {
         const axios = require("axios");
         axios.delete(`http://15.165.18.118/ads/${id}`).then(function(response){
             dispatch(deleteAds(response))
+        }).catch(function(error) {
+            console.log(error);
         })
     }
 }

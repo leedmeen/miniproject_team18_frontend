@@ -17,8 +17,8 @@ const Post = (props) => {
   const addComment = () => {
     const comment = {
       content: comment_ref.current.value,
-      userId: 99,
-      adId: id
+      userId: 1,
+      id: id
     }
     dispatch(commentActions.addCommentDB(comment));
   };
@@ -26,6 +26,8 @@ const Post = (props) => {
   return (
     <React.Fragment>
       <Grid is_center padding='5vh 3vw 3vh 3vw'>
+          <Text bold size='4vh'>{props.props.title}</Text>
+            {/* {props.props.title} */}
           <Text bold size='4vh'>{title}</Text>
         </Grid>
         <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '2vh'}}>
@@ -61,7 +63,10 @@ const Post = (props) => {
           </div>
         <Grid is_center margin_top='1vh'>
           <Input type='text' _ref={comment_ref} placeholder='댓글을 입력해 주세요' width='60vw' height='3vh' fontSize='1.5vh' border='1px solid rgba(232, 52, 78, 0.4)' borderRadius='0.8vw' padding='0 0 0 1vw'></Input>
-          <Button type='submit' _onClick={() => {addComment()}} width='60px' height='3.5vh' color='white' border='none' borderTRRadius='2vh' borderBRRadius='2vh' borderTLRadius='0.5vh' borderBLRadius='0.5vh' fontWeight='bold' backgroundColor='#E8344E' text='확인' margin='0 0 0 -3.0vw'></Button>
+          <Button type='submit' _onClick={()=> {
+            addComment();
+            history.replace(`/detail/${id}`);
+            }} width='60px' height='3.5vh' color='white' border='none' borderTRRadius='2vh' borderBRRadius='2vh' borderTLRadius='0.5vh' borderBLRadius='0.5vh' fontWeight='bold' backgroundColor='#E8344E' text='확인' margin='0 0 0 -3.0vw'></Button>
         </Grid>
     </React.Fragment>
   )
