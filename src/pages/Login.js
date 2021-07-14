@@ -21,7 +21,6 @@ const Login = (props) => {
         }
         dispatch(userActions.loginDB(id, pwd));
     }
-    
 
 
     

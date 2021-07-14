@@ -29,6 +29,8 @@ const loginDB =(id, pwd) => {
     }).then(function(response){
         const accessToken = response.data;
         dispatch(Onlogin(id, accessToken));
+        window.alert('로그인 성공: 환영합니다! :)'); 
+        history.replace('/');
     }).catch(function(error){
         console.log(`로그인 오류 발생: ${error}`)
         })

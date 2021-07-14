@@ -2,8 +2,8 @@
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
-export function TokenToCookie(token) {
-    cookies.set("token", token)
+export function TokenToCookie(session) {
+    cookies.set("session", session)
 }
 
 // export function Logout(){
