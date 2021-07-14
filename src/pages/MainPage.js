@@ -44,9 +44,14 @@ const MainPage = (props) => {
                 : <Grid margin="0 auto" color="white" br="40px"padding="10px" width="200px" height="40px" bg="rgb(232, 52, 78)" 
                 _onClick={() => {window.alert("로그인이 필요한 서비스입니다.")}} hover={'cursor: pointer;'}>
                 게시글 추가하기</Grid> }
-                {ads_list && ads_list.map((p, idx)=> {
-                    return( <Card {...p}></Card> )
-                })}
+                {is_login === true? ads_list && ads_list.map((p, idx)=> {
+                    return( <Grid _onClick={() => {history.push(`/detail/${props.id}`)}} dp="inline"><Card {...p}></Card></Grid> )
+                }) :
+                ads_list && ads_list.map((p, idx)=> {
+                    return( <Grid _onClick={()=> {window.alert("로그인이 필요한 서비스입니다!") }}dp="inline"><Card {...p}></Card></Grid> )
+                })
+
+                }
                 </Grid>
             </Grid>
             <Footer/>
