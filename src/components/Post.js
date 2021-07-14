@@ -13,20 +13,25 @@ import {history} from "../redux/configureStore";
 
 const Post = (props) => {
   const dispatch = useDispatch();
-  const {id, title, createdAt, content, comment_num, host, maxPeople, category, UsersInAd } = props;
+  const {id, title, createdAt, content, comment_num, host, maxPeople, category, UsersInAd, reload } = props;
+  const vacancy_cnt = UsersInAd ? maxPeople - UsersInAd.length : 0
   const [in_party, setInParty] = useState(false);
   const party = {adId: id, userId: 1}
   const comment_ref = React.useRef();
   const addComment = () => {
     const comment = {
       content: comment_ref.current.value,
-      userId: 1,
+      userId: 3,
       id: id
     }
     dispatch(commentActions.addCommentDB(comment));
   };
 
   const inParty = () => {
+    if (vacancy_cnt === 0) {
+      window.alert('신청자 모집이 완료된 게시글입니다!')
+      return;
+    }
     dispatch(partyActions.inPartyDB(party));
   }
 
@@ -40,12 +45,12 @@ const Post = (props) => {
           <Text bold size='4vh'>{title}</Text>
         </Grid>
         <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '2vh'}}>
-          <Divc><Text bold size='large' margin='5px 0.5vw 0 0.5vw' color='#aaa'>남은 자리</Text><Text bold size='large' margin='5px 0 0 0'> {maxPeople}</Text></Divc>
+          <Divc><Text bold size='large' margin='5px 0.5vw 0 0.5vw' color='#aaa'>남은 자리</Text><Text bold size='large' margin='5px 0 0 0'> {vacancy_cnt}</Text></Divc>
             <Divd><Text bold size='large' margin='5px 0.5vw 0 0.5vw' color='#aaa'>{category}</Text></Divd>
           </div>     
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <div style={{display: 'flex', flexDirection: 'left', padding: '2vh 0 1vh 0'}}>
-              <Diva><Text color='white' size='1.8vh' bold>모집중</Text></Diva>
+              { vacancy_cnt === 0 ? <Diva style={{opacity: '0.5', backgroundColor: '#bbb'}}><Text color='black' size='1.8vh' bold>마  감</Text></Diva> : <Diva><Text color='white' size='1.8vh' bold>모집중</Text></Diva>}
               { in_party ? 
                 <Divb onClick={() => {outParty(); setInParty(false)}}><Text color='#E8344E' size='1.3vh' bold>신청취소</Text></Divb>
               :

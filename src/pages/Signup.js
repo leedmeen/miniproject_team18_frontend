@@ -33,7 +33,7 @@ const Signup = (props) => {
     }
     const nickname_double_check = () => {
         if(nickname===""){
-            window.alert("아이디를 입력해주세요!")
+            window.alert("닉네임을 입력해주세요!")
             return;
         }
     }
@@ -48,69 +48,65 @@ const Signup = (props) => {
             transitionLeave={false}>
             <Header/>
             <Grid display="flex" fd="column" mh="100vh" is_center>
-                <Grid br="5px" width="70vw" dp="inline-block" box_shadow="0 4px 25px 0px rgb(0 0 0 / 15%)" padding="20px">
-                <Grid dp="flex" margin="0 0 0 0">
-                    <Grid width="20vw" padding="25px 10px 0 0" is_center>아이디 :</Grid>
-                    <Grid width="55vw">
-                    <TextField fullWidth="True" id="standard-basic" label="Id" color="secondary"
+                <Grid br="5px" width="70vw" dp="inline-block" box_shadow="0 4px 25px 0px rgb(0 0 0 / 15%)" padding="8vh 10vw 10vh 10vw">
+                <Grid dp="flex" margin="0 0 10px 0" padding='0 7vw 0 7vw'>
+                    <Grid width="50vw">
+                    <TextField fullWidth="True" id="standard-basic" label="아이디" color="secondary"
                         onChange={(e) => {
                             setId(e.target.value);
                         }}
-                     />
+                    />
                     </Grid>
-                    <Grid width="25vw">
+                    <Grid width="20vw">
                         <Button backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
-                        width="100%" height="30px"
-                        margin="20px 0 0 0" text="중복확인"></Button>
+                        width="80%" height="30px"
+                        margin="20px 0 0 20px" text="중복확인"></Button>
                     </Grid>
                 </Grid>
-                <Grid dp="flex">
-                    <Grid width="20vw" padding="25px 10px 0 0" is_center>닉네임 : </Grid>
-                    <Grid width="55vw">
-                    <TextField fullWidth="True" id="standard-basic" label="Nickname" color="secondary"
+                <Grid dp="flex" margin="0 0 10px 0" padding='0 7vw 0 7vw'>
+                    <Grid width="50vw">
+                    <TextField fullWidth="True" id="standard-basic" label="닉네임" color="secondary"
                         onChange={(e) => {
                             setNickname(e.target.value);
                         }}
                     />
                     </Grid>
-                    <Grid width="25vw">
+                    <Grid width="20vw">
                         <Button backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
-                        width="100%" height="30px"
-                        margin="20px 0 0 0" text="중복확인"></Button>
+                        width="80%" height="30px"
+                        margin="20px 0 0 20px" text="중복확인"></Button>
                     </Grid>
                 </Grid>
-                <Grid dp="flex">
-                    <Grid width="20vw" padding="25px 10px 0 0" is_center>비밀번호: </Grid>
-                    <Grid width="55vw">
-                    <TextField fullWidth="True" id="standard-basic" label="Password" color="secondary"
+                <Grid dp="flex" margin="0 0 10px 0" padding='0 7vw 0 7vw'>
+                    <Grid width="70vw">
+                    <TextField fullWidth="True" id="standard-basic" label="비밀번호" color="secondary"
                         type="password"
                         onChange={(e) => {
                             setPwd(e.target.value);
                         }}
                     />
                     </Grid>
-                    <Grid width="25vw">
-                    </Grid>
+                    {/* <Grid width="20vw">
+                    </Grid> */}
                 </Grid>
-                <Grid dp="flex">
-                    <Grid width="20vw" padding="25px 10px 0 0" is_center>비밀번호 확인 : </Grid>
-                    <Grid width="55vw">
-                    <TextField fullWidth="True" id="standard-basic" label="Password" color="secondary" 
+                <Grid dp="flex" padding='0 7vw 0 7vw'>
+                    <Grid width="70vw">
+                    <TextField fullWidth="True" id="standard-basic" label="비밀번호 확인" color="secondary" 
                         type="password"
                         onChange={(e) => {
                             setPwdCheck(e.target.value);
                         }}
                     />
                     </Grid>
-                    <Grid width="25vw">
-                    </Grid>
+                    {/* <Grid width="20vw">
+                    </Grid> */}
                 </Grid>
-                <Grid margin="2vh 0 0 0" padding="0 40px 0 40px">
+                <Grid margin="7vh 0 0 0" padding="0 40px 0 40px">
                     <Button _onClick={() => {
                         sign();
                         // history.push("/");
                     }}
-                text='회원가입' backgroundColor='#E8344E' border='none' color='white' width='100%' height='4vh' padding='0.5vh 1vw 0.5vh 1vw' borderRadius='0.5vh' />
+                text='회원가입' backgroundColor='#E8344E' border='none' color='white' width='80%' height='4vh' padding='0.5vh 1vw 0.5vh 1vw' borderRadius='0.5vh' />
                 </Grid>
                 </Grid>
 
