@@ -6,22 +6,19 @@ import Footer from "../components/Footer";
 import Grid from "../element/Grid";
 import {history} from "../redux/configureStore"
 import TextField from '@material-ui/core/TextField';
+
 import Button from '../element/Button';
-import { actionCreators as userActions} from "../redux/modules/user";
-import { useDispatch } from "react-redux";
 
 const Login = (props) => {
-    const dispatch = useDispatch();
 
     const [id, setId] = React.useState("");
     const [pwd, setPwd] = React.useState("");
-
     const login = () => {
         if(id==="" || pwd === ""){
             window.alert("아이디 혹은 비밀번호를 입력해주세요!");
             return;
         }
-        dispatch(userActions.loginDB(id, pwd));
+        console.log(id, pwd);
     }
     
 

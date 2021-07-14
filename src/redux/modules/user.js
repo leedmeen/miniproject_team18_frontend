@@ -51,7 +51,9 @@ export default handleActions(
     [SIGN_UP]: (state, action) => produce(state, (draft) => {
         draft.list.push = {...action.payload};
     })
-}, initialState)
+    }, initialState
+)
+
 const actionCreators={
     logIn,
     loginDB,
