@@ -24,6 +24,7 @@ const Post = (props) => {
       userId: 3,
       id: id
     }
+    console.log(comment);
     dispatch(commentActions.addCommentDB(comment));
   };
 

@@ -1,4 +1,4 @@
- import React from "react";
+import React from "react";
 import "../share/postStyle.css";
 import { CSSTransitionGroup } from 'react-transition-group';
 import Header from "../components/Header";
@@ -32,7 +32,7 @@ const Signup = (props) => {
         }
         const axios = require('axios');
         const result = await axios.get(`http://15.165.18.118/users?accountId=${id}`);
-        if (result.data === true) {
+        if (result.data.accountExist === false) {
             setIdCheck(true);
             window.alert('사용 가능한 아이디입니다!');
         } else {
@@ -46,21 +46,15 @@ const Signup = (props) => {
             window.alert("닉네임을 입력해주세요!")
             return;
         }
-
-        if (idCheck === false || nicknameCheck === false) {
-            window.alert('아이디와 닉네임 중복확인을 모두 진행해주세요!');
-            return;
-        }
         const axios = require('axios');
         const result = await axios.get(`http://15.165.18.118/users?nickname=${nickname}`);
-        if (result.data === true) {
+        if (result.data.nicknameExist === false) {
             setNicknameCheck(true);
             window.alert('사용 가능한 닉네임입니다!');
         } else {
             setNicknameCheck(false);
             window.alert('이미 존재하는 닉네임입니다!');
         }
-        dispatch(userActions.signUpDB(id, nickname, pwd));
     }
 
     const sign = () => {
@@ -72,10 +66,15 @@ const Signup = (props) => {
             window.alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
             return;
         };
+        if (idCheck === false || nicknameCheck === false) {
+            window.alert('아이디와 닉네임 중복확인을 모두 진행해주세요!');
+            return;
+        };
         if (!pwdReg(pwd)){
             window.alert("비밀번호를 8글자 이상 입력하세요!")
             return;
         }
+        dispatch(userActions.signUpDB(id, nickname, pwd));
     }
 
     return (
@@ -98,7 +97,7 @@ const Signup = (props) => {
                     </Grid>
                     <Grid width="20vw">
                         <Button _onClick={() => id_double_check()} backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
-                        width="80%" height="30px"
+                        width="80%" minWidth='80px' height="30px"
                         margin="20px 0 0 20px" text="중복확인"></Button>
                     </Grid>
                 </Grid>
@@ -112,7 +111,7 @@ const Signup = (props) => {
                     </Grid>
                     <Grid width="20vw">
                         <Button _onClick={() => nickname_double_check()}backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
-                        width="80%" height="30px"
+                        width="80%" minWidth='80px' height="30px"
                         margin="20px 0 0 20px" text="중복확인"></Button>
                     </Grid>
                 </Grid>

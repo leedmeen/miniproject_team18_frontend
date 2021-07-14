@@ -1,11 +1,45 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import Grid from '../element/Grid';
 import Logo from '../gaemoim.jpg';
 import { history } from '../redux/configureStore';
+import {getCookie, deleteCookie} from '../share/Cookie';
 
 const Header = (props) => {
+  const [is_login, setIsLogin] = React.useState(false);
+
+  useEffect(() => {
+    let cookie = getCookie('session');
+    if (cookie) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
+
+  const logout = () => {
+    let cookie = getCookie('session');
+    if (!cookie) {
+      setIsLogin(false);
+      history.replace('/login');
+      return;
+    }
+    deleteCookie('session');
+    window.location.reload();
+  }
   
+  if (is_login) {
+    return (
+      <React.Fragment>
+        <Grid is_right>
+          <Menu onClick={() => logout()}>로그아웃</Menu>
+        </Grid>
+        <LogoBox>
+          <Image style={{height: '10vh', width: 'auto'}} src={Logo} alt='로고' onClick={() => history.push('/')}></Image>
+        </LogoBox>
+      </React.Fragment>
+    )
+  }
   return (
     <React.Fragment>
       <Grid is_right>
