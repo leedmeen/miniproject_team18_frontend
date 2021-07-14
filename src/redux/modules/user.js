@@ -18,11 +18,11 @@ const loginDB =(id, pwd) => {
     const data = {id, pwd}
     const axios = require("axios");
         console.log(data);
-    // axios.post("http://15.165.18.118/login" , data).then(function(response){
+    axios.post("http://15.165.18.118/login" , data).then(function(response){
 
-    // }).catch(function(error){
-    //     console.log(error)
-    //     })
+    }).catch(function(error){
+        console.log(error)
+        })
     }
 }
 
@@ -34,7 +34,6 @@ const signUpDB = (id, nickname, pwd) => {
             nickname: nickname,
             password: pwd
         }).then((response) => {
-            console.log(response.data);
             dispatch(signUp(id, nickname, pwd));
         }).catch((err) => {
             console.log(`회원가입 오류 발생: ${err}`);
@@ -56,6 +55,7 @@ export default handleActions(
 const actionCreators={
     logIn,
     loginDB,
+    signUpDB,
 }
 
 export { actionCreators }

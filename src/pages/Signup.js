@@ -8,9 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from "../element/Button";
 import {idReg} from "../share/idReg";
 import {pwdReg} from "../share/pwdReg";
-
 import {history} from "../redux/configureStore";
-import { idCheck } from "../share/idReg";
 
 const Signup = (props) => {
     const [id, setId] = React.useState("");
@@ -42,7 +40,6 @@ const Signup = (props) => {
             window.alert("아이디를 5자이상 입력해주세요!");
             return;
         };
-
     }
     const nickname_double_check = () => {
         if(nickname===""){
