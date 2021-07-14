@@ -24,7 +24,18 @@ const Signup = (props) => {
             window.alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
             return;
         }
-        console.log(id, nickname, pwd, pwdcheck);
+    }
+    const id_double_check = () => {
+        if(id===""){
+            window.alert("아이디를 입력해주세요!")
+            return;
+        }
+    }
+    const nickname_double_check = () => {
+        if(nickname===""){
+            window.alert("아이디를 입력해주세요!")
+            return;
+        }
     }
 
 
@@ -40,27 +51,37 @@ const Signup = (props) => {
                 <Grid br="5px" width="70vw" dp="inline-block" box_shadow="0 4px 25px 0px rgb(0 0 0 / 15%)" padding="20px">
                 <Grid dp="flex" margin="0 0 0 0">
                     <Grid width="20vw" padding="25px 10px 0 0" is_center>아이디 :</Grid>
-                    <Grid width="85vw" padding="0 30px 0 0">
+                    <Grid width="55vw">
                     <TextField fullWidth="True" id="standard-basic" label="Id" color="secondary"
                         onChange={(e) => {
                             setId(e.target.value);
                         }}
                      />
                     </Grid>
+                    <Grid width="25vw">
+                        <Button backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
+                        width="100%" height="30px"
+                        margin="20px 0 0 0" text="중복확인"></Button>
+                    </Grid>
                 </Grid>
                 <Grid dp="flex">
                     <Grid width="20vw" padding="25px 10px 0 0" is_center>닉네임 : </Grid>
-                    <Grid width="85vw" padding="0 30px 0 0">
+                    <Grid width="55vw">
                     <TextField fullWidth="True" id="standard-basic" label="Nickname" color="secondary"
                         onChange={(e) => {
                             setNickname(e.target.value);
                         }}
                     />
                     </Grid>
+                    <Grid width="25vw">
+                        <Button backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
+                        width="100%" height="30px"
+                        margin="20px 0 0 0" text="중복확인"></Button>
+                    </Grid>
                 </Grid>
                 <Grid dp="flex">
                     <Grid width="20vw" padding="25px 10px 0 0" is_center>비밀번호: </Grid>
-                    <Grid width="85vw" padding="0 30px 0 0">
+                    <Grid width="55vw">
                     <TextField fullWidth="True" id="standard-basic" label="Password" color="secondary"
                         type="password"
                         onChange={(e) => {
@@ -68,16 +89,20 @@ const Signup = (props) => {
                         }}
                     />
                     </Grid>
+                    <Grid width="25vw">
+                    </Grid>
                 </Grid>
                 <Grid dp="flex">
                     <Grid width="20vw" padding="25px 10px 0 0" is_center>비밀번호 확인 : </Grid>
-                    <Grid width="85vw" padding="0 30px 0 0">
+                    <Grid width="55vw">
                     <TextField fullWidth="True" id="standard-basic" label="Password" color="secondary" 
                         type="password"
                         onChange={(e) => {
                             setPwdCheck(e.target.value);
                         }}
                     />
+                    </Grid>
+                    <Grid width="25vw">
                     </Grid>
                 </Grid>
                 <Grid margin="2vh 0 0 0" padding="0 40px 0 40px">

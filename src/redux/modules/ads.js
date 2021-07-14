@@ -3,6 +3,7 @@ import {produce} from "immer";
 import "moment";
 import moment from "moment";
 import axios from "axios";
+import {history} from "../configureStore"
 
 const SET_ADS = "SET_ADS";
 const DELETE = "DELETE";
@@ -25,7 +26,7 @@ const setAdsDB = ()=> {    //게시글들 불러오는 액션함수
     }
 }
 const addAdsDB = (inputs) => {   //게시글 추가하는함수
-    return function(dispatch, getState){
+    return function(dispatch, getState, {history}){
         const axios = require("axios");
         axios.post("http://15.165.18.118/ads", 
         {  
