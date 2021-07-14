@@ -6,38 +6,70 @@ import Footer from "../components/Footer";
 import Grid from "../element/Grid";
 import TextField from '@material-ui/core/TextField';
 import Button from "../element/Button";
-
 import {history} from "../redux/configureStore";
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
 
 const Signup = (props) => {
+    const dispatch = useDispatch();
     const [id, setId] = React.useState("");
     const [nickname, setNickname] = React.useState("");
     const [pwd, setPwd] = React.useState("");
     const [pwdcheck, setPwdCheck] = React.useState("");
+    const [idCheck, setIdCheck] = React.useState(false);
+    const [nicknameCheck, setNicknameCheck] = React.useState(false);
 
-    const sign = () => {
-        if(id==="" || pwd==="" || pwdcheck===""){
-            window.alert("아이디 혹은 비밀번호를 입력하세요");
-            return;
-        }
-        if(pwd !== pwdcheck){
-            window.alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
-            return;
-        }
-    }
-    const id_double_check = () => {
-        if(id===""){
+    const id_double_check = async () => {
+        if (id==="") {
             window.alert("아이디를 입력해주세요!")
             return;
         }
-    }
-    const nickname_double_check = () => {
-        if(nickname===""){
-            window.alert("닉네임을 입력해주세요!")
-            return;
+        const axios = require('axios');
+        const result = await axios.get(`http://15.165.18.118/users?accountId=${id}`);
+        console.log(result);
+        console.log(result.isExist);
+        if (result.isExist === true) {
+            setIdCheck(true);
+            window.alert('사용 가능한 아이디입니다!');
+        } else {
+            setIdCheck(false);
+            window.alert('이미 존재하는 아이디입니다!');
         }
     }
 
+    const nickname_double_check = async () => {
+        if (nickname==="") {
+            window.alert("닉네임을 입력해주세요!")
+            return;
+        }
+        const axios = require('axios');
+        const result = await axios.get(`http://15.165.18.118/users?nickname=${nickname}`);
+        console.log(result);
+        console.log(result.isExist);
+        if (result.isExist === true) {
+            setNicknameCheck(true);
+            window.alert('사용 가능한 닉네임입니다!');
+        } else {
+            setNicknameCheck(false);
+            window.alert('이미 존재하는 닉네임입니다!');
+        }
+    }
+
+    const sign = () => {
+        if (id==="" || pwd==="" || pwdcheck==="") {
+            window.alert("아이디 혹은 비밀번호를 입력하세요");
+            return;
+        }
+        if (pwd !== pwdcheck) {
+            window.alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
+            return;
+        }
+        if (idCheck === false || nicknameCheck === false) {
+            window.alert('아이디와 닉네임 중복확인을 모두 진행해주세요!');
+            return;
+        }
+        dispatch(userActions.signUpDB(id, nickname, pwd));
+    }
 
     return (
         <CSSTransitionGroup
@@ -58,7 +90,7 @@ const Signup = (props) => {
                     />
                     </Grid>
                     <Grid width="20vw">
-                        <Button backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
+                        <Button _onClick={() => id_double_check()} backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
                         width="80%" height="30px"
                         margin="20px 0 0 20px" text="중복확인"></Button>
                     </Grid>
@@ -72,7 +104,7 @@ const Signup = (props) => {
                     />
                     </Grid>
                     <Grid width="20vw">
-                        <Button backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
+                        <Button _onClick={() => nickname_double_check()}backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
                         width="80%" height="30px"
                         margin="20px 0 0 20px" text="중복확인"></Button>
                     </Grid>
