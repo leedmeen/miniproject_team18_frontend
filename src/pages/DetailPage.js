@@ -26,6 +26,10 @@ const DetailPage = (props) => {
     dispatch(adsActions.setOneAdDB(id));
   }, []);
 
+  const reload = () => {
+    window.location.reload(`/detail/${id}`);
+  }
+
   return (
     <CSSTransitionGroup
             transitionName="worksTransition"
@@ -39,7 +43,7 @@ const DetailPage = (props) => {
         <Card>
           <Post {...ad} comment_num={comment_found.length} id={id}/>
           { comment_found.map((c) => {
-            return <CommentList {...c} />
+            return <CommentList {...c} reload={reload} />
           })}
         </Card>
       </Grid>

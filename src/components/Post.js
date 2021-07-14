@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Grid from '../element/Grid';
 import Text from '../element/Text';
 import Button from '../element/Button';
@@ -7,12 +7,15 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import { actionCreators as commentActions } from '../redux/modules/comment';
 import { actionCreators as adsActions } from '../redux/modules/ads';
+import { actionCreators as partyActions } from '../redux/modules/party';
 import { useDispatch} from 'react-redux';
 import {history} from "../redux/configureStore";
 
 const Post = (props) => {
   const dispatch = useDispatch();
-  const {id, title, createdAt, content, comment_num, host, maxPeople, category} = props;
+  const {id, title, createdAt, content, comment_num, host, maxPeople, category, UsersInAd } = props;
+  const [in_party, setInParty] = useState(false);
+  const party = {adId: id, userId: 1}
   const comment_ref = React.useRef();
   const addComment = () => {
     const comment = {
@@ -22,6 +25,14 @@ const Post = (props) => {
     }
     dispatch(commentActions.addCommentDB(comment));
   };
+
+  const inParty = () => {
+    dispatch(partyActions.inPartyDB(party));
+  }
+
+  const outParty = () => {
+    dispatch(partyActions.outPartyDB(party));
+  }
 
   return (
     <React.Fragment>
@@ -35,7 +46,11 @@ const Post = (props) => {
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <div style={{display: 'flex', flexDirection: 'left', padding: '2vh 0 1vh 0'}}>
               <Diva><Text color='white' size='1.8vh' bold>모집중</Text></Diva>
-              <Divb><Text color='#E8344E' size='1.3vh' bold>신청하기</Text></Divb>
+              { in_party ? 
+                <Divb onClick={() => {outParty(); setInParty(false)}}><Text color='#E8344E' size='1.3vh' bold>신청취소</Text></Divb>
+              :
+                <Divb onClick={() => {inParty(); setInParty(true)}}><Text color='#E8344E' size='1.3vh' bold>신청하기</Text></Divb>
+              }
             </div>
             <div style={{paddingTop: '2vh'}}>
               <span style={{float: 'right', fontSize: '1.7vh', fontWeight: 'bold'}}>작성자: {host}</span><br />
@@ -59,7 +74,7 @@ const Post = (props) => {
               width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' fontWeight='bold' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제'></Button>
             </div>
           </div>
-        <Grid is_center margin_top='1vh'>
+        <Grid is_center margin='1vh 0 5vh 0'>
           <Input type='text' _ref={comment_ref} placeholder='댓글을 입력해 주세요' width='60vw' height='3vh' fontSize='1.5vh' border='1px solid rgba(232, 52, 78, 0.4)' borderRadius='0.8vw' padding='0 0 0 1vw'></Input>
           <Button type='submit' _onClick={()=> {
             addComment();
