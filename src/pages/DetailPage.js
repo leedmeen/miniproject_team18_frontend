@@ -38,7 +38,9 @@ const DetailPage = (props) => {
         <Header/>
         <Card>
           <Post {...ad} comment_num={comment_found.length} id={id}/>
-          <CommentList props={comment_found}/>
+          { comment_found.map((c) => {
+            return <CommentList {...c} />
+          })}
         </Card>
       </Grid>
       <Footer/>

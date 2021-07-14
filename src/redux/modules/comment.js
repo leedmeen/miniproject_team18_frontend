@@ -28,7 +28,7 @@ const initialComment = {
 };
 
 // Middleware actions
-const setCommentDB = (id) => {
+const setCommentDB = (id) => {                      // 댓글 리스트 불러오는 함수
   return function (dispatch, getState, {history}) {
     instance.get(`/ads/${id}/comments`).then(function(response) {
           dispatch(setComment(response.data));
@@ -55,14 +55,21 @@ const addCommentDB = (comment) => {             // 404 에러가 뜸...ㅠ뭐가
       })
   }
 };
-// const editCommentDB = () => {
-//   return function (dispatch) {
-//     instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response){
+const editCommentDB = (comment) => {                    // 댓글 수정하는 함수
+  return function (dispatch) {
+    instance.put(`/ads/${comment.adId}/comments/${comment.id}`, {
+      content: comment.content,
+      id: parseInt(comment.id),
+      userId: parseInt(comment.userId),
+      adId: parseInt(comment.adId),
+    }).then(function(response) {
+      dispatch(editComment(response.data))
+    }).catch((err) => {
+      console.log(err);
+    })
 
-//     }).catch
-
-//   };
-// };
+  };
+};
 const deleteCommentDB = (adId, commentId) => {
   return function (dispatch) {
     instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response) {
@@ -83,7 +90,7 @@ export default handleActions(
       draft.list.unshift(action.payload.comment);
     }),
     [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
-      
+      draft.list[action.payload.comment.id] = action.payload.comment;
     }),
     [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
       const target_idx = draft.list.findIndex(action.payload.comment);
@@ -97,6 +104,7 @@ const actionCreators = {
   addComment,
   setCommentDB,
   addCommentDB,
+  editCommentDB,
   deleteCommentDB,
 };
 

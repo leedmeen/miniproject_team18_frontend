@@ -29,11 +29,11 @@ const Post = (props) => {
           <Text bold size='4vh'>{title}</Text>
         </Grid>
         <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '2vh'}}>
-          <Divc><Text bold size='large' margin='5px 0.5vw 5px 0.5vw' color='#aaa'>남은 자리</Text><Text bold size='large' margin='5px 0 5px 0'> {maxPeople}</Text></Divc>
-            <Divd><Text bold size='large' margin='5px 0.5vw 5px 0.5vw' color='#aaa'>{category}</Text></Divd>
+          <Divc><Text bold size='large' margin='5px 0.5vw 0 0.5vw' color='#aaa'>남은 자리</Text><Text bold size='large' margin='5px 0 0 0'> {maxPeople}</Text></Divc>
+            <Divd><Text bold size='large' margin='5px 0.5vw 0 0.5vw' color='#aaa'>{category}</Text></Divd>
           </div>     
-          <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '2vh'}}>
-            <div style={{display: 'flex', flexDirection: 'left'}}>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <div style={{display: 'flex', flexDirection: 'left', padding: '2vh 0 1vh 0'}}>
               <Diva><Text color='white' size='1.8vh' bold>모집중</Text></Diva>
               <Divb><Text color='#E8344E' size='1.3vh' bold>신청하기</Text></Divb>
             </div>
@@ -80,13 +80,13 @@ Post.defaultProps = {
 const Diva = styled.span`
   border-radius: 30px;
   background-color: #E8344E;
-  padding: 1.8vh 1.7vw 0.3vh 1.7vw;
+  padding: 1vh 1.7vw 1vh 1.7vw;
 `;
 
 const Divb = styled.span`
   border-radius: 30px;
   background-color: #fff;
-  padding: 1.7vh 1.7vw 0.3vh 1.7vw;
+  padding: 1vh 1.7vw 1vh 1.7vw;
   border: 1px solid #e8344e;
   &:hover {
     opacity: 0.8;
@@ -98,7 +98,7 @@ const Divb = styled.span`
 
 const Divc = styled.span`
   border-radius: 30px;
-  padding: 1.3vh 1.7vw 1.3vh 1.7vw;
+  padding: 1vh 1.7vw 0 1.7vw;
   margin-left: 5px;
   line-height: 3.8vh;
   box-shadow: 0px 0px 5px 7px white inset;
@@ -107,7 +107,7 @@ const Divc = styled.span`
 const Divd = styled.span`
   border-radius: 30px;
   background-color: #fff;
-  padding: 1.7vh 1.7vw 0.3vh 1.7vw;
+  padding: 1vh 1.7vw 1vh 1.7vw;
   border: 1px dashed #e8344e;
   margin-left: 5px;
 `;

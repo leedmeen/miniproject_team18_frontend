@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Input = (props) => {
-  const {type, placeholder, color, fontSize, border, borderRadius, width, height, margin, padding, top, left, cols, rows, _ref} = props;
+  const {type, placeholder, color, fontSize, border, borderRadius, width, height, margin, padding, top, left, cols, rows, _ref, _value, _onChange} = props;
   const styles = {
     border: border,
     borderRadius: borderRadius,
@@ -17,11 +17,13 @@ const Input = (props) => {
     cols: cols,
     rows: rows,
     _ref: _ref,
+    _value: _value,
+    _onChange: _onChange,
   }
 
   return(
     <React.Fragment>
-      <Ipt {...styles} cols={type === 'textarea'? rows : ''} rows={type === 'textarea'? rows : ''} type={type} placeholder={placeholder} ref={_ref}></Ipt>
+      <Ipt {...styles} cols={type === 'textarea'? rows : ''} rows={type === 'textarea'? rows : ''} type={type} placeholder={placeholder} ref={_ref} value={_value} onChange={_onChange}></Ipt>
     </React.Fragment>
   )
 };
