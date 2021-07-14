@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import DetailPage from './pages/DetailPage';
 import { history } from "./redux/configureStore";
@@ -6,6 +6,7 @@ import {Route} from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import {Router} from "react-router";
 import {createGlobalStyle} from "styled-components";
+import {TokenToCookie, logout} from "./share/Cookie";
 
 import MainPage from "./pages/MainPage";
 import PostWrite from "./pages/PostWrite";
@@ -19,6 +20,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App(props) {
+
+  
   return (
     <React.Fragment>
       <GlobalStyle/>

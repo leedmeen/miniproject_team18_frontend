@@ -32,7 +32,8 @@ const Signup = (props) => {
         }
         const axios = require('axios');
         const result = await axios.get(`http://15.165.18.118/users?accountId=${id}`);
-        if (result.data === true) {
+        console.log(result.data.accountExist);
+        if (result.data.accountExist === false) {
             setIdCheck(true);
             window.alert('사용 가능한 아이디입니다!');
         } else {
@@ -53,14 +54,13 @@ const Signup = (props) => {
         }
         const axios = require('axios');
         const result = await axios.get(`http://15.165.18.118/users?nickname=${nickname}`);
-        if (result.data === true) {
+        if (result.data.nicknameExist === true) {
             setNicknameCheck(true);
             window.alert('사용 가능한 닉네임입니다!');
         } else {
             setNicknameCheck(false);
             window.alert('이미 존재하는 닉네임입니다!');
         }
-        dispatch(userActions.signUpDB(id, nickname, pwd));
     }
 
     const sign = () => {
@@ -76,6 +76,7 @@ const Signup = (props) => {
             window.alert("비밀번호를 8글자 이상 입력하세요!")
             return;
         }
+        dispatch(userActions.signUpDB(id, nickname, pwd));
     }
 
     return (
