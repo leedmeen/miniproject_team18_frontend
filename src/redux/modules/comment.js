@@ -51,7 +51,6 @@ const addCommentDB = (comment) => {             // 404 에러가 뜸...ㅠ뭐가
     }).catch(function (error){
         console.log(error);
       }).then(function(response) {
-        console.log(response);
       dispatch(addComment(response.data));
       })
   }

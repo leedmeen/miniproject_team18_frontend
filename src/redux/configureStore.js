@@ -3,6 +3,7 @@ import {createBrowserHistory} from "history";
 import {connectRouter} from "connected-react-router";
 import Ads from "./modules/ads";
 import Comment from './modules/comment';
+// import User from "./modules/user";
 import thunk from "redux-thunk";
 
 export const history = createBrowserHistory({forceRefresh: true});
@@ -10,6 +11,7 @@ export const history = createBrowserHistory({forceRefresh: true});
 const rootReducer = combineReducers({
     ads: Ads,
     comment: Comment,
+    // user: User,
     router: connectRouter(history),
 });
 const middlewares = [thunk.withExtraArgument({history:history})];

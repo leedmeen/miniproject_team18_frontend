@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import DetailPage from './pages/DetailPage';
 import { history } from "./redux/configureStore";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import {Router} from "react-router";
 import {createGlobalStyle} from "styled-components";
@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function App() {
+function App(props) {
   return (
     <React.Fragment>
       <GlobalStyle/>
