@@ -32,7 +32,6 @@ const Signup = (props) => {
         }
         const axios = require('axios');
         const result = await axios.get(`http://15.165.18.118/users?accountId=${id}`);
-        console.log(result.data.accountExist);
         if (result.data.accountExist === false) {
             setIdCheck(true);
             window.alert('사용 가능한 아이디입니다!');

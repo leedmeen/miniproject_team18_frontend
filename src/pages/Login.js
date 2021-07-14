@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux";
 
 const Login = (props) => {
     const dispatch = useDispatch();
-
     const [id, setId] = React.useState("");
     const [pwd, setPwd] = React.useState("");
     const login = () => {

@@ -38,7 +38,7 @@ const setCommentDB = (id) => {                      // 댓글 리스트 불러�
   };
 };
 
-const addCommentDB = (comment) => {             // 404 에러가 뜸...ㅠ뭐가 문제죠 
+const addCommentDB = (comment) => {                       // 댓글 추가하는 함수 
   return function (dispatch) {
     const axios = require("axios");
     const id = parseInt(comment.id);
@@ -48,11 +48,11 @@ const addCommentDB = (comment) => {             // 404 에러가 뜸...ㅠ뭐가
       content: comment.content,
       adId: id,
       userId: user_id,
-    }).catch(function (error){
-        console.log(error);
-      }).then(function(response) {
+    }).then(function(response) {
       dispatch(addComment(response.data));
-      })
+    }).catch(function (error){
+      console.log(error);
+    })
   }
 };
 const editCommentDB = (comment) => {                    // 댓글 수정하는 함수

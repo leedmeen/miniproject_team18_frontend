@@ -3,13 +3,15 @@ import {produce} from "immer";
 import "moment";
 import {TokenToCookie, Logout} from "../../share/Cookie";
 import Cookies from "universal-cookie";
+import {setCookie, deleteCookie} from '../../share/Cookie';
+import {history} from '../configureStore';
 
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
 const SIGN_UP = "SIGN_UP";
 const ON_LOGIN = "ON_LOGIN"
 
-const logIn = createAction(LOG_IN,  (id, pwd) => ({id, pwd}));
+const logIn = createAction(LOG_IN,  (id, token) => ({id, token}));
 const signUp = createAction(SIGN_UP, (id, nickname, pwd) => ({id, nickname, pwd}));
 const Onlogin = createAction(ON_LOGIN, (id, accessToken)=> ({id, accessToken}));
 
@@ -28,7 +30,7 @@ const loginDB =(id, pwd) => {
         const accessToken = response.data;
         dispatch(Onlogin(id, accessToken));
     }).catch(function(error){
-        console.log(error)
+        console.log(`로그인 오류 발생: ${error}`)
         })
     }
 }
@@ -42,6 +44,8 @@ const signUpDB = (id, nickname, pwd) => {
             password: pwd
         }).then((response) => {
             dispatch(signUp(id, nickname, pwd));
+            window.alert('가입을 축하드려요!');
+            window.location.replace('/login');
         }).catch((err) => {
             console.log(`회원가입 오류 발생: ${err}`);
         })
@@ -49,11 +53,11 @@ const signUpDB = (id, nickname, pwd) => {
 }
 
 //reducer
-
 export default handleActions(
     {
     [LOG_IN]: (state, action) => produce(state, (draft) => {
-        console.log(action.payload);
+        draft.list.push(...action.payload);
+        console.log(draft.list);
     }),
     [SIGN_UP]: (state, action) => produce(state, (draft) => {
         draft.list.push = {...action.payload};
@@ -63,7 +67,9 @@ export default handleActions(
         draft.id = action.payload.id;
         draft.token = action.payload.accessToken;
     }),
-
+    [LOG_OUT]: (state, action) => produce(state, (draft) => {
+        console.log(action.payload);
+    })
     }, initialState
 )
 
