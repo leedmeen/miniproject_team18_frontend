@@ -17,13 +17,13 @@ const loginDB =(id, pwd) => {
     return function(dispatch){
     const data = {id, pwd}
     const axios = require("axios");
-        console.log(data);
-    // axios.post("http://15.165.18.118/login" , data).then(function(response){
 
-    // }).catch(function(error){
-    //     console.log(error)
-    //     })
-    }
+    axios.post("" , data).then(function(response){
+
+    }).catch(function(error){
+        console.log(error)
+    })
+}
 }
 
 const signUpDB = (id, nickname, pwd) => {
@@ -52,10 +52,12 @@ export default handleActions(
     [SIGN_UP]: (state, action) => produce(state, (draft) => {
         draft.list.push = {...action.payload};
     })
-}, initialState)
+    }, initialState
+)
+
 const actionCreators={
     logIn,
-    loginDB,
+    signUpDB,
 }
 
 export { actionCreators }
