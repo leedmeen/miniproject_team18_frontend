@@ -6,8 +6,11 @@ import Footer from "../components/Footer";
 import Grid from "../element/Grid";
 import TextField from '@material-ui/core/TextField';
 import Button from "../element/Button";
+import {idReg} from "../share/idReg";
+import {pwdReg} from "../share/pwdReg";
 
 import {history} from "../redux/configureStore";
+import { idCheck } from "../share/idReg";
 
 const Signup = (props) => {
     const [id, setId] = React.useState("");
@@ -20,16 +23,26 @@ const Signup = (props) => {
             window.alert("아이디 혹은 비밀번호를 입력하세요");
             return;
         }
+        if(!pwdReg(pwd)){
+            window.alert("비밀번호를 8자이상 입력해주세요!");
+            return;
+        }
         if(pwd !== pwdcheck){
             window.alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
             return;
         }
+        console.log(id, nickname, pwd, pwdcheck);
     }
     const id_double_check = () => {
         if(id===""){
             window.alert("아이디를 입력해주세요!")
             return;
-        }
+        };
+        if(!idReg(id)){
+            window.alert("아이디를 5자이상 입력해주세요!");
+            return;
+        };
+
     }
     const nickname_double_check = () => {
         if(nickname===""){
@@ -61,7 +74,9 @@ const Signup = (props) => {
                     <Grid width="25vw">
                         <Button backgroundColor='#E8344E' border='none' color='white' borderRadius='0.5vh'
                         width="100%" height="30px"
-                        margin="20px 0 0 0" text="중복확인"></Button>
+                        margin="20px 0 0 0" text="중복확인"
+                        _onClick={()=> {id_double_check();}}
+                        ></Button>
                     </Grid>
                 </Grid>
                 <Grid dp="flex">

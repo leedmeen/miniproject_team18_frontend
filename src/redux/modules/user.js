@@ -15,13 +15,13 @@ const loginDB =(id, pwd) => {
     return function(dispatch){
     const data = {id, pwd}
     const axios = require("axios");
+        console.log(data);
+    // axios.post("http://15.165.18.118/login" , data).then(function(response){
 
-    axios.post("" , data).then(function(response){
-
-    }).catch(function(error){
-        console.log(error)
-    })
-}
+    // }).catch(function(error){
+    //     console.log(error)
+    //     })
+    }
 }
 
 //reducer
@@ -31,9 +31,10 @@ export default handleActions({
     [LOG_IN]: (state, action) => produce(state, (draft) => {
 
     })
-})
+}, initialState)
 const actionCreators={
     logIn,
+    loginDB,
 }
 
 export { actionCreators }
