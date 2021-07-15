@@ -67,7 +67,6 @@ const editCommentDB = (comment) => {                    // 댓글 수정하는 �
     const headers = { Authorization: `Bearer ${getCookie('session')}`}
     instance.put(`/ads/${comment.adId}/comments/${comment.id}`, {
       content: comment.content,
-      id: parseInt(comment.id),
       userId: parseInt(comment.userId),
       adId: parseInt(comment.adId),
     }, {headers: headers}).then(function(response) {
@@ -105,7 +104,14 @@ export default handleActions(
       })
     }),
     [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.list[action.payload.comment.id] = action.payload.comment;
+      let c = action.payload.comment;
+      let idx = draft.list.findIndex((p) => p.id == action.payload.comment.id)
+      draft.list[idx] = {
+        createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+        content: c.content,
+        userId: c.userId,
+        adId: c.adId
+      }
     }),
     [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
       let idx = draft.list.findIndex((p)=> p.id===action.payload.comment)
