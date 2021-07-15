@@ -25,17 +25,20 @@ const setAdsDB = ()=> {    //게시글들 불러오는 액션함수
         })
     }
 }
+
 const addAdsDB = (inputs) => {   //게시글 추가하는함수
     return function(dispatch, getState, {history}){
+        const id = getState(state => state);
         const axios = require("axios");
-        axios.post("http://15.165.18.118/ads", 
+        axios.post("http://15.165.18.118/ads",
         {  
             category: inputs.category,
             content: inputs.content,
             maxPeople: inputs.people,
-            createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-            host: "tester",
-            title: inputs.title}).then(function(response){
+            // createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+            host: id.user.id,
+            title: inputs.title,
+            UsersInAd: [],}).then(function(response){
             dispatch(addAds(response))
         }).catch(function(error) {
             console.log(error);

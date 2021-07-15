@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../share/postStyle.css";
 import { CSSTransitionGroup } from 'react-transition-group';
 import Header from "../components/Header";
@@ -8,10 +8,12 @@ import {history} from "../redux/configureStore"
 import TextField from '@material-ui/core/TextField';
 import {actionCreators as userActions} from "../redux/modules/user";
 import Button from '../element/Button';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {getCookie} from "../share/Cookie";
 
 const Login = (props) => {
     const dispatch = useDispatch();
+    const user_id = useSelector(state => state.user.id)
     const [id, setId] = React.useState("");
     const [pwd, setPwd] = React.useState("");
     const login = () => {
@@ -21,6 +23,12 @@ const Login = (props) => {
         }
         dispatch(userActions.loginDB(id, pwd));
     }
+    useEffect(()=> {
+        if(user_id !== ""){
+            history.push("/")
+        }
+    })
+
 
 
     
@@ -30,7 +38,7 @@ const Login = (props) => {
         transitionAppearTimeout={500}
         transitionEnter={false}
         transitionLeave={false}>
-        <Header/>
+            <Header/>
     <Grid display="flex" fd="column" mh="100vh" is_center>
         <Grid br="5px" width="70vw" dp="inline-block" box_shadow="0 4px 25px 0px rgb(0 0 0 / 15%)" padding="8vh 10vw 10vh 10vw">
         <Grid dp="flex" margin="0 0 20px 0">

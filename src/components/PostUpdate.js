@@ -6,12 +6,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {actionCreators as adsActions} from "../redux/modules/ads";
 import {history} from "../redux/configureStore";
 
 const PostUpdate = (props) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const useStyles = makeStyles((theme) => ({
     margin: {
         margin: theme.spacing(3),
@@ -24,19 +24,16 @@ const PostUpdate = (props) => {
     const titleInput = useRef(null);
     const addData = () => {
         const inputs = {
-        id: props.id,
         title: titleInput.current.value,
         category: categoryInput.current.value,
         content: contentInput.current.value,
         people: peopleInput.current.value,
     }
-    console.log(props)
     if(props.id){
         dispatch(adsActions.editAdsDB(inputs))
     }else{
         dispatch(adsActions.addAdsDB(inputs))
     }
-        history.push("/", null);
     }
 
 

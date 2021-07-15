@@ -20,7 +20,7 @@ const Card = (props) => {
 
         return(
         <React.Fragment>
-            <Grid
+            <Grid 
             props={props}
             br="40px" width="300px" height="400px" dp="inline-block" box_shadow="0 4px 25px 0px rgb(0 0 0 / 15%)" margin="20px">
                 <Grid margin="20px auto" padding="10px"br="16px" width="200px" height="40px" color="white" bg="rgb(232, 52, 78)">{props.title}</Grid>

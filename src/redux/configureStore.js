@@ -6,7 +6,7 @@ import Comment from './modules/comment';
 import User from "./modules/user";
 import thunk from "redux-thunk";
 
-export const history = createBrowserHistory({forceRefresh: true});
+export const history = createBrowserHistory({});
 
 const rootReducer = combineReducers({
     ads: Ads,

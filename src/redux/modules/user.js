@@ -3,8 +3,8 @@ import {produce} from "immer";
 import "moment";
 import {TokenToCookie, Logout} from "../../share/Cookie";
 import Cookies from "universal-cookie";
-import {setCookie, deleteCookie} from '../../share/Cookie';
-import {history} from '../configureStore';
+import {setCookie, deleteCookie, getCookie} from '../../share/Cookie';
+// import {history} from '../configureStore';
 
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
@@ -21,16 +21,16 @@ const initialState = {
     token: "",
 }
 const loginDB =(id, pwd) => {
-    return function(dispatch){
+    return function(dispatch, {history}){
     const axios = require("axios");
     axios.post("http://15.165.18.118/login",{
         accountId: id,
         password: pwd
     }).then(function(response){
         const accessToken = response.data;
+        TokenToCookie(accessToken);
         dispatch(Onlogin(id, accessToken));
-        window.alert('로그인 성공: 환영합니다! :)'); 
-        history.replace('/');
+        window.alert('로그인 성공: 환영합니다! :)');
     }).catch(function(error){
         console.log(`로그인 오류 발생: ${error}`)
         })
@@ -59,13 +59,11 @@ export default handleActions(
     {
     [LOG_IN]: (state, action) => produce(state, (draft) => {
         draft.list.push(...action.payload);
-        console.log(draft.list);
     }),
     [SIGN_UP]: (state, action) => produce(state, (draft) => {
         draft.list.push = {...action.payload};
     }),
     [ON_LOGIN]: (state, action) => produce(state, (draft) => {
-        TokenToCookie(action.payload.accessToken);
         draft.id = action.payload.id;
         draft.token = action.payload.accessToken;
     }),
