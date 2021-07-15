@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Text from '../element/Text';
 import Button from '../element/Button';
 import Input from '../element/Input';
@@ -34,6 +34,8 @@ const CommentList = (props) => {
   const deleteComment = (adId, id) => {
     dispatch(commentActions.deleteCommentDB(adId, id));
   }
+  useEffect(()=> {
+  })
 
   return (
     <React.Fragment>

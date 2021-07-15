@@ -93,7 +93,6 @@ export default handleActions(
       draft.list = [...action.payload.comment_list];
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-      console.log(action.payload.comment);
       draft.list.unshift(action.payload.comment);
     }),
     [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {

@@ -34,7 +34,6 @@ const loginDB =(id, pwd) => {
         const nickname = response.data.user.nickname;
         const id = response.data.user.id;
         TokenToCookie(accessToken);
-        console.log(response.data);
         dispatch(Onlogin(accountId, nickname, id, accessToken));
         window.alert('로그인 성공: 환영합니다! :)');
     }).catch(function(error){

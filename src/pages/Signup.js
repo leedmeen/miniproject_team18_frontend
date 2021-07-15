@@ -46,11 +46,6 @@ const Signup = (props) => {
             window.alert("닉네임을 입력해주세요!")
             return;
         }
-
-        if (idCheck === false || nicknameCheck === false) {
-            window.alert('아이디와 닉네임 중복확인을 모두 진행해주세요!');
-            return;
-        }
         const axios = require('axios');
         const result = await axios.get(`http://15.165.18.118/users?nickname=${nickname}`);
         if (result.data.nicknameExist === true) {
@@ -73,6 +68,11 @@ const Signup = (props) => {
         };
         if (!pwdReg(pwd)){
             window.alert("비밀번호를 8글자 이상 입력하세요!")
+            return;
+        }
+
+        if (idCheck === false || nicknameCheck === false) {
+            window.alert('아이디와 닉네임 중복확인을 모두 진행해주세요!');
             return;
         }
         dispatch(userActions.signUpDB(id, nickname, pwd));
