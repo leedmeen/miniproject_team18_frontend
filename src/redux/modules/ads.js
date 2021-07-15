@@ -56,7 +56,7 @@ const editAdsDB = (inputs) => {   //게시글 수정하는함수
         const nickname = getState(state => state.user.nickname)
         const headers = { authorization: `Bearer ${getCookie('session')}`}
         axios.put(`http://15.165.18.118/ads/${inputs.id}`,   //id는 현재 들어가있는 게시글의 id
-        {   //id: inputs.id,
+        {   
             category: inputs.category,
             content: inputs.content,
             maxPeople: inputs.people,
@@ -118,7 +118,8 @@ export default handleActions(
              }
               draft.list.push(ads_add);
         }),
-        [EDIT_ADS]: (state, action) => produce(state, (draft)=> {    
+        [EDIT_ADS]: (state, action) => produce(state, (draft)=> { 
+            console.log(state);
             // draft.list[action.payload.ads_list.id] =  action.payload.ads_list.data;
         }),
         [DELETE]: (state, action) => produce(state, (draft) => {
