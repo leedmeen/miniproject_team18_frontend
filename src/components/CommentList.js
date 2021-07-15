@@ -26,6 +26,7 @@ const CommentList = (props) => {
 
   const editComment = () => {
     const comment = {
+      nickname: nickname,
       content: edit_content,
       userId: userId,
       adId: adId,

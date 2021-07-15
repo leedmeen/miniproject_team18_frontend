@@ -17,9 +17,14 @@ const Post = (props) => {
   const {id, title, createdAt, content, comment_num, host, maxPeople, category, UsersInAd, reload } = props;
   const [vacancy_cnt, setVacancyCnt] = useState(UsersInAd? maxPeople - UsersInAd.length : 0);
   const [in_party, setInParty] = useState(false);
-  const my_accountId = useSelector(state => state.user.accountId);
+
+  const idx = useSelector(state => state.ads.list.findIndex((p) => p.id == id));
+  const ads_list = useSelector(state => state.ads.list);
+  const party_nickname = useSelector(state => state.party.nickname)
+  console.log(party_nickname);
   const my_userid = useSelector(state => state.user.id);
   const my_nickname = useSelector(state => state.user.nickname);
+  const check_nickname = ads_list[idx].UsersInAd.filter((p)=> p.nickname == my_nickname)
   const comment_ref = React.useRef();
   const addComment = () => {
     const comment = {
@@ -38,7 +43,7 @@ const Post = (props) => {
       setInParty(false);
       return;
     }
-    dispatch(partyActions.inPartyDB(id, my_userid));
+    dispatch(partyActions.inPartyDB(id, my_userid, my_nickname));
   }
 
   const outParty = () => {
@@ -46,7 +51,7 @@ const Post = (props) => {
       adId: id,
       userId: my_userid,
     }
-    dispatch(partyActions.outPartyDB(party));
+    dispatch(partyActions.outPartyDB(party, my_nickname));
   }
 
   return (
@@ -61,10 +66,10 @@ const Post = (props) => {
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <div style={{display: 'flex', flexDirection: 'left', padding: '2vh 0 1vh 0'}}>
               { vacancy_cnt === 0 ? <Diva style={{opacity: '0.5', backgroundColor: '#bbb'}}><Text color='black' size='1.8vh'>마  감</Text></Diva> : <Diva><Text color='white' size='1.8vh'>모집중</Text></Diva>}
-              { my_nickname == host ||  in_party? 
-                <Divb onClick={() => {outParty(); setInParty(false); setVacancyCnt(vacancy_cnt + 1)}}><Text color='#E8344E' size='1.3vh' bold>신청취소</Text></Divb>
+              { check_nickname.length !== 0 || party_nickname ? 
+              <Divb onClick={() => {outParty(); setVacancyCnt(vacancy_cnt + 1)}}><Text color='#E8344E' size='1.3vh' bold>신청취소</Text></Divb>
               :
-                <Divb onClick={() => {inParty(); setInParty(true); setVacancyCnt(vacancy_cnt - 1)}}><Text color='#E8344E' size='1.3vh' bold>신청하기</Text></Divb>
+              <Divb onClick={() => {inParty(); setVacancyCnt(vacancy_cnt - 1)}}><Text color='#E8344E' size='1.3vh' bold>신청하기</Text></Divb>
               }
             </div>
             <div style={{paddingTop: '2vh'}}>

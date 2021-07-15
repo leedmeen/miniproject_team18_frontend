@@ -119,7 +119,7 @@ export default handleActions(
               draft.list.push(ads_add);
         }),
         [EDIT_ADS]: (state, action) => produce(state, (draft)=> { 
-            console.log(state);
+            // console.log(state);
             // draft.list[action.payload.ads_list.id] =  action.payload.ads_list.data;
         }),
         [DELETE]: (state, action) => produce(state, (draft) => {

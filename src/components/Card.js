@@ -27,7 +27,7 @@ const Card = (props) => {
                 <Grid margin="20px auto" padding="10px"br="16px" width="200px" height="40px" color="white" bg="#12CDD4">{props.category}</Grid>
                 <Text margin="0 0 50px 0" dp="block" size="1.2em">{props.host}</Text>
                 <Text margin="0 0 50px 0" dp="block">{props.createdAt}</Text>
-                <Text margin="0 0 30px 0" dp="block">인원 0/{props.maxPeople}명</Text>
+                <Text margin="0 0 30px 0" dp="block">인원 {props.UsersInAd.length}/{props.maxPeople}명</Text>
                 <Grid margin="0 auto" padding="10px"br="16px" width="70px" color="white" height="40px" bg="rgb(232, 52, 78)">모집중</Grid>
             </Grid>
         </React.Fragment>

@@ -6,31 +6,30 @@ import {getCookie} from '../../share/Cookie';
 const IN_PARTY = 'IN_PARTY';
 const OUT_PARTY = 'OUT_PARTY';
 
-const inParty = createAction(IN_PARTY, (adId, userId) => ({adId, userId}));
-const outParty = createAction(OUT_PARTY, (adId, userId) => ({adId, userId}));
+const inParty = createAction(IN_PARTY, (adId, userId, nickname) => ({adId, userId, nickname}));
+const outParty = createAction(OUT_PARTY, (adId, userId, nickname) => ({adId, userId, nickname}));
 
 // initialState
 const initialState = {
-  adId: "",
-  userId: "",
+  nickname: "",
 }
 
 // Middleware actions
-const inPartyDB = (adId, userId) => {                      // 참가 신청 리스트에 추가
+const inPartyDB = (adId, userId, nickname) => {                      // 참가 신청 리스트에 추가
   return function (dispatch) {
     const headers = { authorization: `Bearer ${getCookie('session')}`}
     instance.post(`/ads/${adId}/parties`, {
       adId: adId,
-      userId: userId
+      userId: userId,
     }, {headers: headers}).then(function(response) {
-          dispatch(inParty(response.data));
+          dispatch(inParty(adId, userId, nickname));
         }).catch(function (err) {
           console.log(err);
         })
   };
 };
 
-const outPartyDB = (party) => {               // 참가 신청 리스트에서 제외
+const outPartyDB = (party, nickname) => {               // 참가 신청 리스트에서 제외
   return function (dispatch) {
     const adId = parseInt(party.adId);
     const userId = parseInt(party.userId);
@@ -38,7 +37,7 @@ const outPartyDB = (party) => {               // 참가 신청 리스트에서 �
 
     instance.delete(`/ads/${adId}/parties/${userId}`,{headers: headers}
     ).then(function(response) {
-      dispatch(outParty(response.data));
+      dispatch(outParty(party, nickname));
     }).catch(function(err) {
       console.log(err);
     })
@@ -49,9 +48,10 @@ const outPartyDB = (party) => {               // 참가 신청 리스트에서 �
 export default handleActions(
   {
     [IN_PARTY]: (state, action) => produce(state, (draft) => {
-      // draft.list.push(...action.payload);
+      draft.nickname = action.payload.nickname;
     }),
     [OUT_PARTY]: (state, action) => produce(state, (draft) => {
+      draft.nickname = "";
       // const target_idx = draft.list.findIndex(action.payload);
       // draft.list.splice(target_idx, 1);
     }),

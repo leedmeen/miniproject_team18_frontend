@@ -50,7 +50,8 @@ const addCommentDB = (comment) => {                       // 댓글 추가하는
     const nickname = comment.nickname;
     const headers = { authorization: `Bearer ${getCookie('session')}`}
     axios.post(`http://15.165.18.118/ads/${adId}/comments`, 
-    {
+    { 
+      nickname: nickname,
       content: content,
       adId: adId,
       userId: userId,
@@ -66,6 +67,7 @@ const editCommentDB = (comment) => {                    // 댓글 수정하는 �
   return function (dispatch) {
     const headers = { Authorization: `Bearer ${getCookie('session')}`}
     instance.put(`/ads/${comment.adId}/comments/${comment.id}`, {
+      nickname: comment.nickname,
       content: comment.content,
       userId: parseInt(comment.userId),
       adId: parseInt(comment.adId),
@@ -98,6 +100,7 @@ export default handleActions(
       let c = action.payload.comment;
       draft.list.push({
         createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+        nickname: c.nickname,
         content: c.content,
         userId: c.userId,
         adId: c.adId
@@ -108,6 +111,7 @@ export default handleActions(
       let idx = draft.list.findIndex((p) => p.id == action.payload.comment.id)
       draft.list[idx] = {
         createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+        nickname: c.nickname,
         content: c.content,
         userId: c.userId,
         adId: c.adId
