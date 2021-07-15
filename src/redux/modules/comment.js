@@ -10,7 +10,7 @@ const EDIT_COMMENT = 'EDIT_COMMENT';
 const DELETE_COMMENT = 'DELETE_COMMENT';
 
 const setComment = createAction(SET_COMMENT, (comment_list) => ({comment_list}));
-const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
+const addComment = createAction(ADD_COMMENT, (adId, userId, nickname, content) => ({adId, userId, nickname, content}));
 const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
 const deleteComment = createAction(DELETE_COMMENT, (comment) => ({comment}));
 
@@ -52,7 +52,7 @@ const addCommentDB = (comment) => {                       // 댓글 추가하는
       adId: id,
       userId: user_id,
     }, {headers: headers}).then(function(response) {
-      dispatch(addComment(response.data));
+      dispatch(addComment(id, user_id, comment.nickname, comment.content));
     }).catch(function (error){
       console.log(`댓글 작성하기 오류: ${error}`);
     })
@@ -92,7 +92,8 @@ export default handleActions(
       draft.list = [...action.payload.comment_list];
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.list.unshift(action.payload.comment);
+      console.log(action.payload);
+      draft.list.unshift({adId: action.payload.adId, userId: action.payload.userId, nickname: action.payload.nickname, content: action.payload.content});
     }),
     [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
       draft.list[action.payload.comment.id] = action.payload.comment;

@@ -26,6 +26,7 @@ const Post = (props) => {
       content: comment_ref.current.value,
       userId: my_userid,
       adid: id,
+      nickname: my_nickname,
     }
     dispatch(commentActions.addCommentDB(comment));
   };
@@ -53,7 +54,7 @@ const Post = (props) => {
           </div>     
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <div style={{display: 'flex', flexDirection: 'left', padding: '2vh 0 1vh 0'}}>
-              { vacancy_cnt === 0 ? <Diva style={{opacity: '0.5', backgroundColor: '#bbb'}}><Text color='black' size='1.8vh' bold>마  감</Text></Diva> : <Diva><Text color='white' size='1.8vh' bold>모집중</Text></Diva>}
+              { vacancy_cnt === 0 ? <Diva style={{opacity: '0.5', backgroundColor: '#bbb'}}><Text color='black' size='1.8vh'>마  감</Text></Diva> : <Diva><Text color='white' size='1.8vh'>모집중</Text></Diva>}
               { my_nickname == host ||  in_party ? 
                 <Divb onClick={() => {outParty(); setInParty(false); setVacancyCnt(vacancy_cnt + 1)}}><Text color='#E8344E' size='1.3vh' bold>신청취소</Text></Divb>
               :
@@ -72,7 +73,7 @@ const Post = (props) => {
             </div>
             { my_nickname == host ? 
             <div>
-            <Button width='60px' height='3vh' backgroundColor='#E8344E' color='white' border='none' borderTLRadius='1vh' borderBLRadius='1vh' fontWeight='bold' text='수정'
+            <Button width='60px' height='3vh' backgroundColor='#E8344E' color='white' border='none' borderTLRadius='1vh' borderBLRadius='1vh' text='수정'
               _onClick={()=> {
                 history.push(`/ads/${id}`)
               }}></Button>
@@ -80,7 +81,7 @@ const Post = (props) => {
               dispatch(adsActions.deleteAdsDB(id));
               history.push("/");
             }} 
-            width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' fontWeight='bold' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제'></Button>
+            width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제'></Button>
           </div>
             : '' }
           </div>
@@ -89,7 +90,7 @@ const Post = (props) => {
           <Button type='submit' _onClick={()=> {
             addComment();
             history.push(`/detail/${id}`);
-            }} width='60px' height='3.5vh' color='white' border='none' borderTRRadius='2vh' borderBRRadius='2vh' borderTLRadius='0.5vh' borderBLRadius='0.5vh' fontWeight='bold' backgroundColor='#E8344E' text='확인' margin='0 0 0 -3.0vw'></Button>
+            }} width='60px' height='3.5vh' color='white' border='none' borderTRRadius='2vh' borderBRRadius='2vh' borderTLRadius='0.5vh' borderBLRadius='0.5vh' backgroundColor='#E8344E' text='확인' margin='0 0 0 -3.0vw'></Button>
         </Grid>
     </React.Fragment>
   )
