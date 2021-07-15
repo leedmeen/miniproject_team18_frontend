@@ -4,6 +4,7 @@ import "moment";
 import moment from "moment";
 import axios from "axios";
 import {history} from "../configureStore"
+import {getCookie} from '../../share/Cookie';
 
 const SET_ADS = "SET_ADS";
 const DELETE = "DELETE";
@@ -25,17 +26,21 @@ const setAdsDB = ()=> {    //게시글들 불러오는 액션함수
         })
     }
 }
+
 const addAdsDB = (inputs) => {   //게시글 추가하는함수
     return function(dispatch, getState, {history}){
+        const id = getState(state => state);
         const axios = require("axios");
-        axios.post("http://15.165.18.118/ads", 
+        const headers = { authorization: `Bearer ${getCookie('session')}`}
+        axios.post("http://15.165.18.118/ads",
         {  
             category: inputs.category,
             content: inputs.content,
             maxPeople: inputs.people,
-            createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-            host: "tester",
-            title: inputs.title}).then(function(response){
+            // createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+            host: id.user.id,
+            title: inputs.title,
+            UsersInAd: [],}, {headers: headers}).then(function(response){
             dispatch(addAds(response))
         }).catch(function(error) {
             console.log(error);
@@ -45,6 +50,7 @@ const addAdsDB = (inputs) => {   //게시글 추가하는함수
 const editAdsDB = (inputs) => {   //게시글 수정하는함수
     return function(dispatch, getState){
         const axios = require("axios");
+        const headers = { authorization: `Bearer ${getCookie('session')}`}
         axios.put(`http://15.165.18.118/ads/${inputs.id}`,   //id는 현재 들어가있는 게시글의 id
         {   id: inputs.id,
             category: inputs.category,
@@ -52,7 +58,7 @@ const editAdsDB = (inputs) => {   //게시글 수정하는함수
             maxPeople: inputs.people,
             host: "tester",
             createdAt: moment().format("YYYY-MM-DDThh:mm:ss.000z"),
-            title: "TESTTEST"}).then(function(response){
+            title: "TESTTEST"}, {headers: headers}).then(function(response){
                 dispatch(editAds(response, inputs.id))
             }).catch(function(error) {
                 console.log(error);
@@ -62,7 +68,8 @@ const editAdsDB = (inputs) => {   //게시글 수정하는함수
 const deleteAdsDB = (id) => {
     return function(dispatch){
         const axios = require("axios");
-        axios.delete(`http://15.165.18.118/ads/${id}`).then(function(response){
+        const headers = { authorization: `Bearer ${getCookie('session')}`}
+        axios.delete(`http://15.165.18.118/ads/${id}`, {headers: headers}).then(function(response){
             dispatch(deleteAds(response))
         }).catch(function(error) {
             console.log(error);
@@ -74,7 +81,8 @@ const deleteAdsDB = (id) => {
 const setOneAdDB = (id) => {
     return function(dispatch, getState) {
         const axios = require('axios');
-        axios.get("http://15.165.18.118/ads").then(function(response){
+        const headers = { authorization: `Bearer ${getCookie('session')}`}
+        axios.get("http://15.165.18.118/ads", {headers: headers}).then(function(response){
             dispatch(setAds(response.data));
         }).catch(function(error) {
             console.log(error);

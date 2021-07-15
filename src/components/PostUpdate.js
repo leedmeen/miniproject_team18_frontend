@@ -6,12 +6,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {actionCreators as adsActions} from "../redux/modules/ads";
 import {history} from "../redux/configureStore";
 
 const PostUpdate = (props) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const useStyles = makeStyles((theme) => ({
     margin: {
         margin: theme.spacing(3),
@@ -24,19 +24,16 @@ const PostUpdate = (props) => {
     const titleInput = useRef(null);
     const addData = () => {
         const inputs = {
-        id: props.id,
         title: titleInput.current.value,
         category: categoryInput.current.value,
         content: contentInput.current.value,
         people: peopleInput.current.value,
     }
-    console.log(props)
     if(props.id){
         dispatch(adsActions.editAdsDB(inputs))
     }else{
         dispatch(adsActions.addAdsDB(inputs))
     }
-        history.push("/", null);
     }
 
 
@@ -46,7 +43,7 @@ const PostUpdate = (props) => {
             <Grid is_center bg="#ffffff" margin="20px 0 20px 0" dp="flex"></Grid>
                 <Grid box_shadow="0 4px 25px 0 rgb(0 0 0 /15%)" br="40px" margin="0 auto" width="80%" dp="flex" fd="column" is_center>
                 <Grid width="60wv" padding="5px 30px 20px 30px">
-                <Text size="1.3em" color="#3E373A">게시글 제목</Text>
+                <Text size="1.3em" color="#3E373A" margin='0 0 3vh 0'>게시글 제목</Text>
                 <TextField
                     id="outlined-multiline-static"
                     label="게시글 제목을 입력하세요"
