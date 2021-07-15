@@ -11,12 +11,14 @@ const LOG_OUT = "LOG_OUT";
 const SIGN_UP = "SIGN_UP";
 const ON_LOGIN = "ON_LOGIN"
 
-const logIn = createAction(LOG_IN,  (id, token) => ({id, token}));
+const logIn = createAction(LOG_IN,  (accountId, nickname, id, token) => ({accountId, nickname, id, token}));
 const signUp = createAction(SIGN_UP, (id, nickname, pwd) => ({id, nickname, pwd}));
-const Onlogin = createAction(ON_LOGIN, (id, accessToken)=> ({id, accessToken}));
+const Onlogin = createAction(ON_LOGIN, (accountId, nickname, id, token)=> ({accountId, nickname, id, token}));
 
 
 const initialState = {
+    accountId: "",
+    nickname: "",
     id: "",
     token: "",
 }
@@ -27,10 +29,13 @@ const loginDB =(id, pwd) => {
         accountId: id,
         password: pwd
     }).then(function(response){
-        const accessToken = response.data;
+        const accessToken = response.data.token.replace('"', '');
+        const accountId = response.data.user.accountId;
+        const nickname = response.data.user.nickname;
+        const id = response.data.user.id;
         TokenToCookie(accessToken);
         console.log(response.data);
-        dispatch(Onlogin(id, accessToken));
+        dispatch(Onlogin(accountId, nickname, id, accessToken));
         window.alert('로그인 성공: 환영합니다! :)');
     }).catch(function(error){
         console.log(`로그인 오류 발생: ${error}`)
@@ -59,12 +64,14 @@ const signUpDB = (id, nickname, pwd) => {
 export default handleActions(
     {
     [LOG_IN]: (state, action) => produce(state, (draft) => {
-        draft.list.push(...action.payload);
+        draft.list = {...action.payload};
     }),
     [SIGN_UP]: (state, action) => produce(state, (draft) => {
         draft.list.push = {...action.payload};
     }),
     [ON_LOGIN]: (state, action) => produce(state, (draft) => {
+        draft.accountId = action.payload.accountId;
+        draft.nickname = action.payload.nickname;
         draft.id = action.payload.id;
         draft.token = action.payload.accessToken;
     }),

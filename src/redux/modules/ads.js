@@ -38,7 +38,7 @@ const addAdsDB = (inputs) => {   //게시글 추가하는함수
             content: inputs.content,
             maxPeople: inputs.people,
             // createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-            host: id.user.id,
+            host: id.user.nickname,
             title: inputs.title,
             UsersInAd: [],}, {headers: headers}).then(function(response){
             dispatch(addAds(response))

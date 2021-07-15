@@ -1,6 +1,7 @@
 import {createAction, handleActions} from 'redux-actions';
 import {produce} from 'immer';
 import instance from '../../share/Request';   // axios 전역 설정
+import {getCookie} from '../../share/Cookie';
 
 // Actions
 const SET_COMMENT = 'SET_COMMENT';
@@ -43,12 +44,13 @@ const addCommentDB = (comment) => {                       // 댓글 추가하는
     const axios = require("axios");
     const id = parseInt(comment.id);
     const user_id = parseInt(comment.userId);
+    const headers = { authorization: `Bearer ${getCookie('session')}`}
     axios.post(`http://15.165.18.118/ads/${id}/comments`, 
     {
       content: comment.content,
       adId: id,
       userId: user_id,
-    }).then(function(response) {
+    }, {headers: headers}).then(function(response) {
       dispatch(addComment(response.data));
     }).catch(function (error){
       console.log(error);
@@ -57,12 +59,13 @@ const addCommentDB = (comment) => {                       // 댓글 추가하는
 };
 const editCommentDB = (comment) => {                    // 댓글 수정하는 함수
   return function (dispatch) {
+    const headers = { authorization: `Bearer ${getCookie('session')}`}
     instance.put(`/ads/${comment.adId}/comments/${comment.id}`, {
       content: comment.content,
       id: parseInt(comment.id),
       userId: parseInt(comment.userId),
       adId: parseInt(comment.adId),
-    }).then(function(response) {
+    }, {headers: headers}).then(function(response) {
       dispatch(editComment(response.data))
     }).catch((err) => {
       console.log(err);
@@ -72,9 +75,10 @@ const editCommentDB = (comment) => {                    // 댓글 수정하는 �
 };
 const deleteCommentDB = (adId, commentId) => {
   return function (dispatch) {
+    const headers = { authorization: `Bearer ${getCookie('session')}`}
     instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response) {
       dispatch(deleteComment(response.data));
-    }).catch(function(err) {
+    }, {headers: headers}).catch(function(err) {
       console.log(err);
     })
   };

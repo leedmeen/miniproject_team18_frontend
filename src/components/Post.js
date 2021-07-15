@@ -8,21 +8,23 @@ import { Paper } from '@material-ui/core';
 import { actionCreators as commentActions } from '../redux/modules/comment';
 import { actionCreators as adsActions } from '../redux/modules/ads';
 import { actionCreators as partyActions } from '../redux/modules/party';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import {history} from "../redux/configureStore";
+
 
 const Post = (props) => {
   const dispatch = useDispatch();
   const {id, title, createdAt, content, comment_num, host, maxPeople, category, UsersInAd, reload } = props;
   const vacancy_cnt = UsersInAd ? maxPeople - UsersInAd.length : 0
   const [in_party, setInParty] = useState(false);
-  const party = {adId: id, userId: 1}
+  const accountId = useSelector(state => state.user.accountId);
+  const userId = useSelector(state => state.user.id);
   const comment_ref = React.useRef();
   const addComment = () => {
     const comment = {
       content: comment_ref.current.value,
-      userId: 3,
-      id: id
+      userId: accountId,
+      id: userId
     }
     console.log(comment);
     dispatch(commentActions.addCommentDB(comment));
@@ -33,11 +35,11 @@ const Post = (props) => {
       window.alert('신청자 모집이 완료된 게시글입니다!')
       return;
     }
-    dispatch(partyActions.inPartyDB(party));
+    dispatch(partyActions.inPartyDB(id, userId));
   }
 
   const outParty = () => {
-    dispatch(partyActions.outPartyDB(party));
+    dispatch(partyActions.outPartyDB(id, userId));
   }
 
   return (
