@@ -4,6 +4,7 @@ import "moment";
 import moment from "moment";
 import axios from "axios";
 import {history} from "../configureStore"
+import { getCookie } from "../../share/Cookie";
 
 const SET_ADS = "SET_ADS";
 const DELETE = "DELETE";
@@ -38,7 +39,9 @@ const addAdsDB = (inputs) => {   //게시글 추가하는함수
             // createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             host: id.user.id,
             title: inputs.title,
-            UsersInAd: [],}).then(function(response){
+            UsersInAd: [],},
+            ).then(function(response){
+                // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             dispatch(addAds(response))
         }).catch(function(error) {
             console.log(error);
@@ -54,8 +57,9 @@ const editAdsDB = (inputs) => {   //게시글 수정하는함수
             content: inputs.content,
             maxPeople: inputs.people,
             host: "tester",
-            createdAt: moment().format("YYYY-MM-DDThh:mm:ss.000z"),
-            title: "TESTTEST"}).then(function(response){
+            // createdAt: moment().format("YYYY-MM-DDThh:mm:ss.000z"),
+            title: "TESTTEST"}
+            ).then(function(response){
                 dispatch(editAds(response, inputs.id))
             }).catch(function(error) {
                 console.log(error);
