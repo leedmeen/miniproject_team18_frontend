@@ -16,7 +16,7 @@ const CommentList = (props) => {
   const [edit_content, setEditContent] = useState(content);
   const input = _.debounce((i) => setEditContent(i), 500);
   const my_userid = useSelector(state => state.user.id);
-
+  
   const editContent = (e) => {
     input(e.target.value);
   };

@@ -5,6 +5,7 @@ import Ads from "./modules/ads";
 import Comment from './modules/comment';
 import User from "./modules/user";
 import thunk from "redux-thunk";
+import party from "./modules/party";
 
 export const history = createBrowserHistory({});
 
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     ads: Ads,
     comment: Comment,
     user: User,
+    party: party,
     router: connectRouter(history),
 });
 const middlewares = [thunk.withExtraArgument({history:history})];

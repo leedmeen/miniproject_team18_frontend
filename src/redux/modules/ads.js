@@ -4,7 +4,7 @@ import "moment";
 import moment from "moment";
 import axios from "axios";
 import {history} from "../configureStore"
-import {getCookie} from '../../share/Cookie';
+import { getCookie } from "../../share/Cookie";
 
 const SET_ADS = "SET_ADS";
 const DELETE = "DELETE";
@@ -42,6 +42,7 @@ const addAdsDB = (inputs) => {   //게시글 추가하는함수
             title: inputs.title,
             UsersInAd: [],}, {headers: headers}).then(function(response){
             dispatch(addAds(response))
+            history.push("/")
         }).catch(function(error) {
             console.log(error);
         })
@@ -71,6 +72,7 @@ const deleteAdsDB = (id) => {
         const headers = { authorization: `Bearer ${getCookie('session')}`}
         axios.delete(`http://15.165.18.118/ads/${id}`, {headers: headers}).then(function(response){
             dispatch(deleteAds(response))
+            history.push("/");
         }).catch(function(error) {
             console.log(error);
         })

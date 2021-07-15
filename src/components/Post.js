@@ -85,7 +85,7 @@ const Post = (props) => {
               }}></Button>
             <Button _onClick={()=> {
               dispatch(adsActions.deleteAdsDB(id));
-              history.push("/");
+              // history.push("/");
             }} 
             width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제'></Button>
           </div>

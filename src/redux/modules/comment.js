@@ -13,7 +13,7 @@ const DELETE_COMMENT = 'DELETE_COMMENT';
 const setComment = createAction(SET_COMMENT, (comment_list) => ({comment_list}));
 const addComment = createAction(ADD_COMMENT, (adId, userId, nickname, content) => ({adId, userId, nickname, content}));
 const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
-const deleteComment = createAction(DELETE_COMMENT, (comment) => ({comment}));
+const deleteComment = createAction(DELETE_COMMENT, (id, comment) => ({id, comment}));
 
 // initialState
 const initialState = {
@@ -61,6 +61,7 @@ const addCommentDB = (comment) => {                       // 댓글 추가하는
     })
   }
 };
+
 const editCommentDB = (comment) => {                    // 댓글 수정하는 함수
   return function (dispatch) {
     const id = parseInt(comment.id);
@@ -85,11 +86,11 @@ const editCommentDB = (comment) => {                    // 댓글 수정하는 �
 
   };
 };
-const deleteCommentDB = (adId, commentId) => {
+const deleteCommentDB = (id, comment_id) => {
   return function (dispatch) {
     const headers = { authorization: `Bearer ${getCookie('session')}`};
-    console.log(adId, commentId);
-    instance.delete(`/ads/${adId}/comments/${commentId}`, {headers: headers}).then(function(response) {
+    console.log(id, comment_id);
+    instance.delete(`/ads/${id}/comments/${comment_id}`, {headers: headers}).then(function(response) {
       console.log(response.data);
       dispatch(deleteComment(response.data));
     }).catch(function(err) {
@@ -113,8 +114,9 @@ export default handleActions(
       console.log(action.payload);
     }),
     [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
-      const target_idx = draft.list.findIndex(action.payload.comment);
-      draft.list.splice(target_idx, 1);
+      console.log(action.payload);
+      // const target_idx = draft.list.action.payload.commentId
+      // draft.list.splice(target_idx, 1);
     })
   }, initialState
 );

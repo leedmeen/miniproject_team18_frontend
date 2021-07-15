@@ -2,7 +2,6 @@ import {createAction, handleActions} from 'redux-actions';
 import {produce} from 'immer';
 import instance from '../../share/Request';   // axios 전역 설정
 import {getCookie} from '../../share/Cookie';
-
 // Actions
 const IN_PARTY = 'IN_PARTY';
 const OUT_PARTY = 'OUT_PARTY';
@@ -12,7 +11,8 @@ const outParty = createAction(OUT_PARTY, (adId, userId) => ({adId, userId}));
 
 // initialState
 const initialState = {
-  list: [],
+  adId: "",
+  userId: "",
 }
 
 // Middleware actions
@@ -35,12 +35,10 @@ const outPartyDB = (party) => {               // 참가 신청 리스트에서 �
     const adId = parseInt(party.adId);
     const userId = parseInt(party.userId);
     const headers = { authorization: `Bearer ${getCookie('session')}`}
-    instance.delete(`/ads/${adId}/parties`, {
-      adId: adId,
-      userId: userId,
-    }, {headers: headers}).then(function(response) {
-      console.log(response.data);
-      dispatch(outParty(adId, userId));
+
+    instance.delete(`/ads/${adId}/parties/${userId}`,{headers: headers}
+    ).then(function(response) {
+      dispatch(outParty(response.data));
     }).catch(function(err) {
       console.log(err);
     })
@@ -51,11 +49,10 @@ const outPartyDB = (party) => {               // 참가 신청 리스트에서 �
 export default handleActions(
   {
     [IN_PARTY]: (state, action) => produce(state, (draft) => {
-      draft.list.push(...action.payload);
+      // draft.list.push(...action.payload);
     }),
     [OUT_PARTY]: (state, action) => produce(state, (draft) => {
-      const target_idx = draft.list.findIndex(action.payload);
-      console.log(action.payload);
+      // const target_idx = draft.list.findIndex(action.payload);
       // draft.list.splice(target_idx, 1);
     }),
   }, initialState
