@@ -25,7 +25,7 @@ const Post = (props) => {
     const comment = {
       content: comment_ref.current.value,
       userId: my_userid,
-      adid: id,
+      adId: id,
       nickname: my_nickname,
     }
     dispatch(commentActions.addCommentDB(comment));
@@ -34,13 +34,19 @@ const Post = (props) => {
   const inParty = () => {
     if (vacancy_cnt === 0) {
       window.alert('신청자 모집이 완료된 게시글입니다!')
+      setVacancyCnt(0);
+      setInParty(false);
       return;
     }
     dispatch(partyActions.inPartyDB(id, my_userid));
   }
 
   const outParty = () => {
-    dispatch(partyActions.outPartyDB(id, my_userid));
+    const party = {
+      adId: id,
+      userId: my_userid,
+    }
+    dispatch(partyActions.outPartyDB(party));
   }
 
   return (
@@ -55,7 +61,7 @@ const Post = (props) => {
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <div style={{display: 'flex', flexDirection: 'left', padding: '2vh 0 1vh 0'}}>
               { vacancy_cnt === 0 ? <Diva style={{opacity: '0.5', backgroundColor: '#bbb'}}><Text color='black' size='1.8vh'>마  감</Text></Diva> : <Diva><Text color='white' size='1.8vh'>모집중</Text></Diva>}
-              { my_nickname == host ||  in_party ? 
+              { my_nickname == host ||  in_party || my_nickname in UsersInAd ? 
                 <Divb onClick={() => {outParty(); setInParty(false); setVacancyCnt(vacancy_cnt + 1)}}><Text color='#E8344E' size='1.3vh' bold>신청취소</Text></Divb>
               :
                 <Divb onClick={() => {inParty(); setInParty(true); setVacancyCnt(vacancy_cnt - 1)}}><Text color='#E8344E' size='1.3vh' bold>신청하기</Text></Divb>

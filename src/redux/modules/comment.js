@@ -2,6 +2,7 @@ import {createAction, handleActions} from 'redux-actions';
 import {produce} from 'immer';
 import instance from '../../share/Request';   // axios 전역 설정
 import {getCookie} from '../../share/Cookie';
+import moment from "moment";
 
 // Actions
 const SET_COMMENT = 'SET_COMMENT';
@@ -43,16 +44,18 @@ const setCommentDB = (id) => {                      // 댓글 리스트 불러�
 const addCommentDB = (comment) => {                       // 댓글 추가하는 함수 
   return function (dispatch) {
     const axios = require("axios");
-    const id = parseInt(comment.id);
-    const user_id = parseInt(comment.userId);
+    const adId = parseInt(comment.adId);
+    const userId = parseInt(comment.userId);
+    const content = comment.content;
+    const nickname = comment.nickname;
     const headers = { authorization: `Bearer ${getCookie('session')}`}
-    axios.post(`http://15.165.18.118/ads/${id}/comments`, 
+    axios.post(`http://15.165.18.118/ads/${adId}/comments`, 
     {
-      content: comment.content,
-      adId: id,
-      userId: user_id,
+      content: content,
+      adId: adId,
+      userId: userId,
     }, {headers: headers}).then(function(response) {
-      dispatch(addComment(id, user_id, comment.nickname, comment.content));
+      dispatch(addComment(adId, userId, nickname, content));
     }).catch(function (error){
       console.log(`댓글 작성하기 오류: ${error}`);
     })
@@ -60,14 +63,22 @@ const addCommentDB = (comment) => {                       // 댓글 추가하는
 };
 const editCommentDB = (comment) => {                    // 댓글 수정하는 함수
   return function (dispatch) {
+    const id = parseInt(comment.id);
+    const userId = parseInt(comment.userId);
+    const adId = parseInt(comment.adId);
+    const content = comment.content;
+    const createdAt = moment().format("YYYY-MM-DDThh:mm:ss.000z");
     const headers = { authorization: `Bearer ${getCookie('session')}`}
     instance.put(`/ads/${comment.adId}/comments/${comment.id}`, {
-      content: comment.content,
-      id: parseInt(comment.id),
-      userId: parseInt(comment.userId),
-      adId: parseInt(comment.adId),
+      id: id,
+      content: content,
+      createdAt: createdAt,
+      userId: userId,
+      adId: adId
     }, {headers: headers}).then(function(response) {
-      dispatch(editComment(response.data))
+      console.log(response.data);
+      const comment = {id: id, content: content, createdAt: createdAt, userId: userId, adId: adId}
+      dispatch(editComment(comment));
     }).catch((err) => {
       console.log(`댓글 수정하기 오류: ${err}`);
     })
@@ -76,10 +87,12 @@ const editCommentDB = (comment) => {                    // 댓글 수정하는 �
 };
 const deleteCommentDB = (adId, commentId) => {
   return function (dispatch) {
-    const headers = { authorization: `Bearer ${getCookie('session')}`}
-    instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response) {
+    const headers = { authorization: `Bearer ${getCookie('session')}`};
+    console.log(adId, commentId);
+    instance.delete(`/ads/${adId}/comments/${commentId}`, {headers: headers}).then(function(response) {
+      console.log(response.data);
       dispatch(deleteComment(response.data));
-    }, {headers: headers}).catch(function(err) {
+    }).catch(function(err) {
       console.log(`댓글 삭제하기 오류: ${err}`);
     })
   };
@@ -96,7 +109,8 @@ export default handleActions(
       draft.list.unshift({adId: action.payload.adId, userId: action.payload.userId, nickname: action.payload.nickname, content: action.payload.content});
     }),
     [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.list[action.payload.comment.id] = action.payload.comment;
+      // draft.list[action.payload.comment.id] = action.payload.comment;
+      console.log(action.payload);
     }),
     [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
       const target_idx = draft.list.findIndex(action.payload.comment);

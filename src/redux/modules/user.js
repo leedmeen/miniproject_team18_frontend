@@ -51,6 +51,7 @@ const signUpDB = (id, nickname, pwd) => {
             nickname: nickname,
             password: pwd
         }).then((response) => {
+            console.log(response.data);
             dispatch(signUp(id, nickname, pwd));
             window.alert('가입을 축하드려요!');
             window.location.replace('/login');
@@ -67,7 +68,7 @@ export default handleActions(
         draft.list = {...action.payload};
     }),
     [SIGN_UP]: (state, action) => produce(state, (draft) => {
-        draft.list.push = {...action.payload};
+        draft.list = {...action.payload};
     }),
     [ON_LOGIN]: (state, action) => produce(state, (draft) => {
         draft.accountId = action.payload.accountId;

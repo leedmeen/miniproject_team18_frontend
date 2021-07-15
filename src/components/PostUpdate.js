@@ -43,7 +43,7 @@ const PostUpdate = (props) => {
             <Grid is_center bg="#ffffff" margin="20px 0 20px 0" dp="flex"></Grid>
                 <Grid box_shadow="0 4px 25px 0 rgb(0 0 0 /15%)" br="40px" margin="0 auto" width="80%" dp="flex" fd="column" padding='0 0 50px 0' is_center>
                 <Grid width="60wv" padding="50px 30px 0px 30px">
-                <Text size="1.3em" color="#3E373A">게시글 제목</Text>
+                <Text size="1.3em" color="#3E373A" padding='0 0 1vh 0'>게시글 제목</Text>
                 <TextField
                     id="outlined-multiline-static"
                     label="게시글 제목을 입력하세요"
