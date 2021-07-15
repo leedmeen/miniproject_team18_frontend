@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from '../element/Grid';
 import Text from '../element/Text';
 import Button from '../element/Button';
@@ -15,18 +15,18 @@ import {history} from "../redux/configureStore";
 const Post = (props) => {
   const dispatch = useDispatch();
   const {id, title, createdAt, content, comment_num, host, maxPeople, category, UsersInAd, reload } = props;
-  const vacancy_cnt = UsersInAd ? maxPeople - UsersInAd.length : 0
+  const [vacancy_cnt, setVacancyCnt] = useState(UsersInAd? maxPeople - UsersInAd.length : 0);
   const [in_party, setInParty] = useState(false);
-  const accountId = useSelector(state => state.user.accountId);
-  const userId = useSelector(state => state.user.id);
+  const my_accountId = useSelector(state => state.user.accountId);
+  const my_userid = useSelector(state => state.user.id);
+  const my_nickname = useSelector(state => state.user.nickname);
   const comment_ref = React.useRef();
   const addComment = () => {
     const comment = {
       content: comment_ref.current.value,
-      userId: accountId,
-      id: userId
+      userId: my_userid,
+      adid: id,
     }
-    console.log(comment);
     dispatch(commentActions.addCommentDB(comment));
   };
 
@@ -35,11 +35,11 @@ const Post = (props) => {
       window.alert('신청자 모집이 완료된 게시글입니다!')
       return;
     }
-    dispatch(partyActions.inPartyDB(id, userId));
+    dispatch(partyActions.inPartyDB(id, my_userid));
   }
 
   const outParty = () => {
-    dispatch(partyActions.outPartyDB(id, userId));
+    dispatch(partyActions.outPartyDB(id, my_userid));
   }
 
   return (
@@ -54,15 +54,15 @@ const Post = (props) => {
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <div style={{display: 'flex', flexDirection: 'left', padding: '2vh 0 1vh 0'}}>
               { vacancy_cnt === 0 ? <Diva style={{opacity: '0.5', backgroundColor: '#bbb'}}><Text color='black' size='1.8vh' bold>마  감</Text></Diva> : <Diva><Text color='white' size='1.8vh' bold>모집중</Text></Diva>}
-              { in_party ? 
-                <Divb onClick={() => {outParty(); setInParty(false)}}><Text color='#E8344E' size='1.3vh' bold>신청취소</Text></Divb>
+              { my_nickname == host ||  in_party ? 
+                <Divb onClick={() => {outParty(); setInParty(false); setVacancyCnt(vacancy_cnt + 1)}}><Text color='#E8344E' size='1.3vh' bold>신청취소</Text></Divb>
               :
-                <Divb onClick={() => {inParty(); setInParty(true)}}><Text color='#E8344E' size='1.3vh' bold>신청하기</Text></Divb>
+                <Divb onClick={() => {inParty(); setInParty(true); setVacancyCnt(vacancy_cnt - 1)}}><Text color='#E8344E' size='1.3vh' bold>신청하기</Text></Divb>
               }
             </div>
             <div style={{paddingTop: '2vh'}}>
-              <span style={{float: 'right', fontSize: '1.7vh', fontWeight: 'bold'}}>작성자: {host}</span><br />
-                <span style={{fontSize: '1.7vh', fontWeight: 'bold'}}>작성시각: {createdAt}</span>
+              <span style={{float: 'right', fontSize: '1.7vh'}}>작성자: {host}</span><br />
+                <span style={{fontSize: '1.7vh'}}>작성시각: {createdAt}</span>
             </div>
           </div>
           <Paper variant="outlined" style={{margin: '1vh 0 1vh 0', borderRadius: '1vw', padding: '2vh'}}><Text size='2vh'>{content}</Text></Paper>
@@ -70,17 +70,19 @@ const Post = (props) => {
             <div>
               <Text size='1.8vh' color='#E8344E' bold>댓글 {comment_num}개</Text>
             </div>
+            { my_nickname == host ? 
             <div>
-              <Button width='60px' height='3vh' backgroundColor='#E8344E' color='white' border='none' borderTLRadius='1vh' borderBLRadius='1vh' fontWeight='bold' text='수정'
-                _onClick={()=> {
-                  history.push(`/ads/${id}`)
-                }}></Button>
-              <Button _onClick={()=> {
-                dispatch(adsActions.deleteAdsDB(id));
-                history.push("/");
-              }} 
-              width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' fontWeight='bold' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제'></Button>
-            </div>
+            <Button width='60px' height='3vh' backgroundColor='#E8344E' color='white' border='none' borderTLRadius='1vh' borderBLRadius='1vh' fontWeight='bold' text='수정'
+              _onClick={()=> {
+                history.push(`/ads/${id}`)
+              }}></Button>
+            <Button _onClick={()=> {
+              dispatch(adsActions.deleteAdsDB(id));
+              history.push("/");
+            }} 
+            width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' fontWeight='bold' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제'></Button>
+          </div>
+            : '' }
           </div>
         <Grid is_center margin='1vh 0 5vh 0'>
           <Input type='text' _ref={comment_ref} placeholder='댓글을 입력해 주세요' width='60vw' height='3vh' fontSize='1.5vh' border='1px solid rgba(232, 52, 78, 0.4)' borderRadius='0.8vw' padding='0 0 0 1vw'></Input>

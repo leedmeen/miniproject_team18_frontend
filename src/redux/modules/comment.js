@@ -31,10 +31,11 @@ const initialComment = {
 // Middleware actions
 const setCommentDB = (id) => {                      // 댓글 리스트 불러오는 함수
   return function (dispatch, getState, {history}) {
+    const headers = { authorization: `Bearer ${getCookie('session')}`}
     instance.get(`/ads/${id}/comments`).then(function(response) {
           dispatch(setComment(response.data));
-        }).catch(function (err) {
-          console.log(err);
+        }, {headers: headers}).catch(function (err) {
+          console.log(`댓글 불러오기 오류: ${err}`);
         })
   };
 };
@@ -53,7 +54,7 @@ const addCommentDB = (comment) => {                       // 댓글 추가하는
     }, {headers: headers}).then(function(response) {
       dispatch(addComment(response.data));
     }).catch(function (error){
-      console.log(error);
+      console.log(`댓글 작성하기 오류: ${error}`);
     })
   }
 };
@@ -68,7 +69,7 @@ const editCommentDB = (comment) => {                    // 댓글 수정하는 �
     }, {headers: headers}).then(function(response) {
       dispatch(editComment(response.data))
     }).catch((err) => {
-      console.log(err);
+      console.log(`댓글 수정하기 오류: ${err}`);
     })
 
   };
@@ -79,7 +80,7 @@ const deleteCommentDB = (adId, commentId) => {
     instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response) {
       dispatch(deleteComment(response.data));
     }, {headers: headers}).catch(function(err) {
-      console.log(err);
+      console.log(`댓글 삭제하기 오류: ${err}`);
     })
   };
 };
@@ -88,7 +89,7 @@ const deleteCommentDB = (adId, commentId) => {
 export default handleActions(
   {
     [SET_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.list.push(...action.payload.comment_list);
+      draft.list = [...action.payload.comment_list];
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
       draft.list.unshift(action.payload.comment);
