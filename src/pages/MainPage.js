@@ -46,7 +46,7 @@ const MainPage = (props) => {
                 _onClick={() => {window.alert("로그인이 필요한 서비스입니다.")}} hover={'cursor: pointer;'}>
                 게시글 추가하기</Grid> }
                 {is_login === true? ads_list && ads_list.map((p, idx)=> {
-                    return( <Grid _onClick={() => {history.push(`/detail${p.id}`)}} dp="inline"><Card {...p}></Card></Grid> )
+                    return( <Grid _onClick={() => {history.push(`/detail/${p.id}`)}} dp="inline"><Card {...p}></Card></Grid> )
                 }) :
                 ads_list && ads_list.map((p, idx)=> {
                     return( <Grid _onClick={()=> {window.alert("로그인이 필요한 서비스입니다!") }}dp="inline"><Card {...p}></Card></Grid> )
