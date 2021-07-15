@@ -40,8 +40,10 @@ const addAdsDB = (inputs) => {   //게시글 추가하는함수
             // createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             host: id.user.nickname,
             title: inputs.title,
-            UsersInAd: [],}, {headers: headers}).then(function(response){
-            dispatch(addAds(response))
+            UsersInAd:[{
+                nickname: id.user.nickname,
+            }]}, {headers: headers}).then(function(response){
+            dispatch(addAds(inputs))
             history.push("/")
         }).catch(function(error) {
             console.log(error);
@@ -103,9 +105,18 @@ export default handleActions(
         [SET_ADS]: (state, action) => produce(state, (draft) => {
             draft.list = [...action.payload.ads_list];     //게시글 데이터를 전부 불러서 배열에 등록
         }),
-        [ADD_ADS]: (state, action) => produce(state, (draft)=> {    //추가된 게시글 데이터 배열에 추가
-            // let idx = draft.list.findIndex((p) => p.id === action.payload.ads_list);
-            draft.list.unshift(action.payload.response)
+        [ADD_ADS]: (state, action) => produce(state, (draft)=> {   
+             //추가된 게시글 데이터 배열에 추가
+             let c = action.payload.ads_list
+             let ads_add = {
+                category: c.category,
+                content: c.content,
+                maxPeople: c.people,
+                createdAt: moment().format("YYYY-MM-DDThh:mm:ss.000z"),
+                title: c.title,
+                UsersInAd: [],
+             }
+              draft.list.push(ads_add);
         }),
         [EDIT_ADS]: (state, action) => produce(state, (draft)=> {    
             // draft.list[action.payload.ads_list.id] =  action.payload.ads_list.data;
