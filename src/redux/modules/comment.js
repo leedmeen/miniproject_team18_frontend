@@ -1,6 +1,7 @@
 import {createAction, handleActions} from 'redux-actions';
 import {produce} from 'immer';
 import instance from '../../share/Request';   // axios 전역 설정
+import {getCookie} from "../../share/Cookie";
 
 // Actions
 const SET_COMMENT = 'SET_COMMENT';
@@ -42,28 +43,31 @@ const addCommentDB = (comment) => {                       // 댓글 추가하는
   return function (dispatch) {
     const axios = require("axios");
     const id = parseInt(comment.id);
+    const headers = { authorization: `Bearer ${getCookie('session')}`}
     const user_id = parseInt(comment.userId);
     axios.post(`http://15.165.18.118/ads/${id}/comments`, 
     {
       content: comment.content,
       adId: id,
-      userId: user_id,
-    }).then(function(response) {
-      dispatch(addComment(response.data));
+      userId: 1,
+    }, {headers: headers}).then(function(){
+      dispatch(addComment(comment));
     }).catch(function (error){
       console.log(error);
     })
   }
 };
+
 const editCommentDB = (comment) => {                    // 댓글 수정하는 함수
   return function (dispatch) {
+    const headers = { authorization: `Bearer ${getCookie('session')}`}
     instance.put(`/ads/${comment.adId}/comments/${comment.id}`, {
       content: comment.content,
       id: parseInt(comment.id),
       userId: parseInt(comment.userId),
       adId: parseInt(comment.adId),
-    }).then(function(response) {
-      dispatch(editComment(response.data))
+    }, {headers: headers}).then(function(response) {
+      dispatch(editComment(comment))
     }).catch((err) => {
       console.log(err);
     })
@@ -72,9 +76,10 @@ const editCommentDB = (comment) => {                    // 댓글 수정하는 �
 };
 const deleteCommentDB = (adId, commentId) => {
   return function (dispatch) {
+    const headers = { authorization: `Bearer ${getCookie('session')}`}
     instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response) {
       dispatch(deleteComment(response.data));
-    }).catch(function(err) {
+    },{headers, headers}).catch(function(err) {
       console.log(err);
     })
   };

@@ -25,7 +25,7 @@ const Header = (props) => {
       return;
     }
     deleteCookie('session');
-    window.location.reload();
+    window.location.replace('/');
   }
   
   if (is_login) {

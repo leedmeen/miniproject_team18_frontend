@@ -13,7 +13,7 @@ import {getCookie} from "../share/Cookie";
 
 const Login = (props) => {
     const dispatch = useDispatch();
-    const user_id = useSelector(state => state.user.id)
+    const user_id = useSelector(state => state.user.user.accountId);
     const [id, setId] = React.useState("");
     const [pwd, setPwd] = React.useState("");
     const login = () => {
@@ -24,8 +24,8 @@ const Login = (props) => {
         dispatch(userActions.loginDB(id, pwd));
     }
     useEffect(()=> {
-        if(user_id !== ""){
-            history.push("/")
+        if(user_id){
+            history.push("/");
         }
     })
 
