@@ -12,7 +12,7 @@ const DELETE_COMMENT = 'DELETE_COMMENT';
 const setComment = createAction(SET_COMMENT, (comment_list) => ({comment_list}));
 const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
 const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
-const deleteComment = createAction(DELETE_COMMENT, (comment) => ({comment}));
+const deleteComment = createAction(DELETE_COMMENT, (id, comment) => ({id, comment}));
 
 // initialState
 const initialState = {
@@ -43,16 +43,16 @@ const setCommentDB = (id) => {                      // 댓글 리스트 불러�
 const addCommentDB = (comment) => {                       // 댓글 추가하는 함수 
   return function (dispatch) {
     const axios = require("axios");
-    const id = parseInt(comment.id);
+    const id = comment.id;
     const headers = { authorization: `Bearer ${getCookie('session')}`}
     const user_id = parseInt(comment.userId);
     axios.post(`http://15.165.18.118/ads/${id}/comments`, 
     {
       content: comment.content,
-      adId: id,
+      adId: comment.adid,
       userId: user_id,
     }, {headers: headers}).then(function(response) {
-      dispatch(addComment(response.data));
+      dispatch(addComment(comment));
     }).catch(function (error){
       console.log(`댓글 작성하기 오류: ${error}`);
     })
@@ -61,25 +61,25 @@ const addCommentDB = (comment) => {                       // 댓글 추가하는
 
 const editCommentDB = (comment) => {                    // 댓글 수정하는 함수
   return function (dispatch) {
-    const headers = { authorization: `Bearer ${getCookie('session')}`}
+    const headers = { Authorization: `Bearer ${getCookie('session')}`}
     instance.put(`/ads/${comment.adId}/comments/${comment.id}`, {
       content: comment.content,
       id: parseInt(comment.id),
       userId: parseInt(comment.userId),
       adId: parseInt(comment.adId),
     }, {headers: headers}).then(function(response) {
-      dispatch(editComment(response.data))
+      dispatch(editComment(comment))
     }).catch((err) => {
       console.log(`댓글 수정하기 오류: ${err}`);
     })
 
   };
 };
-const deleteCommentDB = (adId, commentId) => {
+const deleteCommentDB = (id, comment_id) => {
   return function (dispatch) {
-    const headers = { authorization: `Bearer ${getCookie('session')}`}
-    instance.delete(`/ads/${adId}/comments/${commentId}`).then(function(response) {
-      dispatch(deleteComment(response.data));
+    const headers = { "authorization": `Bearer ${getCookie('session')}`}
+    instance.delete(`/ads/${id}/comments/${comment_id}`,{headers: headers}).then(function(response) {
+      dispatch(deleteComment(id, comment_id));
     }, {headers: headers}).catch(function(err) {
       console.log(`댓글 삭제하기 오류: ${err}`);
     })
@@ -93,14 +93,16 @@ export default handleActions(
       draft.list = [...action.payload.comment_list];
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
+      console.log(action.payload.comment);
       draft.list.unshift(action.payload.comment);
     }),
     [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
       draft.list[action.payload.comment.id] = action.payload.comment;
     }),
     [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
-      const target_idx = draft.list.findIndex(action.payload.comment);
-      draft.list.splice(target_idx, 1);
+      console.log(action.payload);
+      // const target_idx = draft.list.action.payload.commentId
+      // draft.list.splice(target_idx, 1);
     })
   }, initialState
 );

@@ -33,10 +33,9 @@ const inPartyDB = (adId, userId) => {                      // 참가 신청 리�
 const outPartyDB = (adId, userId) => {                     // 참가 신청 리스트에서 제외
   return function (dispatch) {
     const headers = { authorization: `Bearer ${getCookie('session')}`}
-    instance.delete(`/ads/${adId}/parties`, {
-      adId: adId,
-      userId: userId
-    }, {headers: headers}).then(function(response) {
+
+    instance.delete(`/ads/${adId}/parties/${userId}`,{headers: headers}
+    ).then(function(response) {
       dispatch(outParty(response.data));
     }).catch(function(err) {
       console.log(err);
@@ -48,11 +47,10 @@ const outPartyDB = (adId, userId) => {                     // 참가 신청 리�
 export default handleActions(
   {
     [IN_PARTY]: (state, action) => produce(state, (draft) => {
-      draft.list.push(...action.payload);
+      // draft.list.push(...action.payload);
     }),
     [OUT_PARTY]: (state, action) => produce(state, (draft) => {
-      const target_idx = draft.list.findIndex(action.payload);
-      console.log(action.payload);
+      // const target_idx = draft.list.findIndex(action.payload);
       // draft.list.splice(target_idx, 1);
     }),
   }, initialState

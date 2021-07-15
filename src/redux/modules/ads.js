@@ -72,6 +72,7 @@ const deleteAdsDB = (id) => {
         const headers = { authorization: `Bearer ${getCookie('session')}`}
         axios.delete(`http://15.165.18.118/ads/${id}`, {headers: headers}).then(function(response){
             dispatch(deleteAds(response))
+            history.push("/");
         }).catch(function(error) {
             console.log(error);
         })

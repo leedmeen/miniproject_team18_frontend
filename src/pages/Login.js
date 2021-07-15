@@ -13,7 +13,7 @@ import {getCookie} from "../share/Cookie";
 
 const Login = (props) => {
     const dispatch = useDispatch();
-    const user_id = useSelector(state => state.user.user.accountId);
+    const user_id = useSelector(state => state.user.accountId);
     const [id, setId] = React.useState("");
     const [pwd, setPwd] = React.useState("");
     const login = () => {

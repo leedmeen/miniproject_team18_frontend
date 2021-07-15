@@ -16,7 +16,7 @@ const CommentList = (props) => {
   const [edit_content, setEditContent] = useState(content);
   const input = _.debounce((i) => setEditContent(i), 500);
   const my_userid = useSelector(state => state.user.id);
-
+  
   const editContent = (e) => {
     input(e.target.value);
   };
@@ -46,13 +46,13 @@ const CommentList = (props) => {
       { my_userid == userId && edit ? 
         <>
           <Input type='text' _onChange={editContent} value={edit_content} width='45vw' height='3vh' fontSize='1.5vh' border='1px solid rgba(232, 52, 78, 0.4)' borderRadius='0.8vw' padding='0 0 0 1vw'></Input>
-          <Button _onClick={() => {editComment(); reload();}} width='60px' height='3.5vh' color='white' border='none' borderTRRadius='2vh' borderBRRadius='2vh' borderTLRadius='0.5vh' borderBLRadius='0.5vh' fontWeight='bold' backgroundColor='#E8344E' text='수정' margin='0 0 0 -3.0vw' />
+          <Button _onClick={() => {editComment();}} width='60px' height='3.5vh' color='white' border='none' borderTRRadius='2vh' borderBRRadius='2vh' borderTLRadius='0.5vh' borderBLRadius='0.5vh' fontWeight='bold' backgroundColor='#E8344E' text='수정' margin='0 0 0 -3.0vw' />
         </>
       : '' }
         { my_userid == userId && !edit ?
         <>
         <Button _onClick={() => setEdit(true)} width='60px' height='3vh' backgroundColor='#E8344E' color='white' border='none' borderTLRadius='1vh' borderBLRadius='1vh' fontWeight='bold' text='수정' />
-        <Button _onClick={() => {deleteComment(adId, id); reload();}} width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' fontWeight='bold' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제' />
+        <Button _onClick={() => {deleteComment(adId, id);}} width='60px' height='3vh' color='white' border='none' borderTRRadius='1vh' borderBRRadius='1vh' fontWeight='bold' backgroundColor='#E8344E' margin='0 0 0 0.2vw' text='삭제' />
         </>
         :
         ''
