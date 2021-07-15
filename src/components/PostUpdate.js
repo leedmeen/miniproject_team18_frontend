@@ -41,9 +41,9 @@ const PostUpdate = (props) => {
     return (
         <React.Fragment>
             <Grid is_center bg="#ffffff" margin="20px 0 20px 0" dp="flex"></Grid>
-                <Grid box_shadow="0 4px 25px 0 rgb(0 0 0 /15%)" br="40px" margin="0 auto" width="80%" dp="flex" fd="column" is_center>
-                <Grid width="60wv" padding="5px 30px 20px 30px">
-                <Text size="1.3em" color="#3E373A" margin='0 0 3vh 0'>게시글 제목</Text>
+                <Grid box_shadow="0 4px 25px 0 rgb(0 0 0 /15%)" br="40px" margin="0 auto" width="80%" dp="flex" fd="column" padding='0 0 50px 0' is_center>
+                <Grid width="60wv" padding="50px 30px 0px 30px">
+                <Text size="1.3em" color="#3E373A">게시글 제목</Text>
                 <TextField
                     id="outlined-multiline-static"
                     label="게시글 제목을 입력하세요"
@@ -59,7 +59,7 @@ const PostUpdate = (props) => {
                 <Text size="1.3em" color="#3E373A"> 주제 </Text>
                 <TextField
                     id="standard-textarea"
-                    label="주제 입력"
+                    label="주제를 입력하세요"
                     color="secondary"
                     inputRef={categoryInput}
                     variant="outlined"
