@@ -43,16 +43,18 @@ const setCommentDB = (id) => {                      // 댓글 리스트 불러�
 const addCommentDB = (comment) => {                       // 댓글 추가하는 함수 
   return function (dispatch) {
     const axios = require("axios");
-    const id = comment.id;
+    const adId = parseInt(comment.adId);
+    const userId = parseInt(comment.userId);
+    const content = comment.content;
+    const nickname = comment.nickname;
     const headers = { authorization: `Bearer ${getCookie('session')}`}
-    const user_id = parseInt(comment.userId);
-    axios.post(`http://15.165.18.118/ads/${id}/comments`, 
+    axios.post(`http://15.165.18.118/ads/${adId}/comments`, 
     {
-      content: comment.content,
-      adId: comment.adid,
-      userId: user_id,
+      content: content,
+      adId: adId,
+      userId: userId,
     }, {headers: headers}).then(function(response) {
-      dispatch(addComment(comment));
+      dispatch(addComment(adId, userId, nickname, content));
     }).catch(function (error){
       console.log(`댓글 작성하기 오류: ${error}`);
     })
@@ -93,7 +95,7 @@ export default handleActions(
       draft.list = [...action.payload.comment_list];
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.list.unshift(action.payload.comment);
+      draft.list.unshift({adId: action.payload.adId, userId: action.payload.userId, nickname: action.payload.nickname, content: action.payload.content});
     }),
     [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
       draft.list[action.payload.comment.id] = action.payload.comment;

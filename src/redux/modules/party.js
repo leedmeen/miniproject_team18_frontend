@@ -30,8 +30,10 @@ const inPartyDB = (adId, userId) => {                      // 참가 신청 리�
   };
 };
 
-const outPartyDB = (adId, userId) => {                     // 참가 신청 리스트에서 제외
+const outPartyDB = (party) => {               // 참가 신청 리스트에서 제외
   return function (dispatch) {
+    const adId = parseInt(party.adId);
+    const userId = parseInt(party.userId);
     const headers = { authorization: `Bearer ${getCookie('session')}`}
 
     instance.delete(`/ads/${adId}/parties/${userId}`,{headers: headers}
