@@ -51,16 +51,18 @@ const addAdsDB = (inputs) => {   //게시글 추가하는함수
 const editAdsDB = (inputs) => {   //게시글 수정하는함수
     return function(dispatch, getState){
         const axios = require("axios");
+        const nickname = getState(state => state.user.nickname)
         const headers = { authorization: `Bearer ${getCookie('session')}`}
         axios.put(`http://15.165.18.118/ads/${inputs.id}`,   //id는 현재 들어가있는 게시글의 id
-        {   id: inputs.id,
+        {   //id: inputs.id,
             category: inputs.category,
             content: inputs.content,
             maxPeople: inputs.people,
-            host: "tester",
+            host: nickname.user.nickname,
             createdAt: moment().format("YYYY-MM-DDThh:mm:ss.000z"),
-            title: "TESTTEST"}, {headers: headers}).then(function(response){
+            title: inputs.title}, {headers: headers}).then(function(response){
                 dispatch(editAds(response, inputs.id))
+                history.push("/");
             }).catch(function(error) {
                 console.log(error);
             })

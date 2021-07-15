@@ -24,6 +24,7 @@ const PostUpdate = (props) => {
     const titleInput = useRef(null);
     const addData = () => {
         const inputs = {
+        id: props.id,
         title: titleInput.current.value,
         category: categoryInput.current.value,
         content: contentInput.current.value,

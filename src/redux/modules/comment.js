@@ -2,6 +2,7 @@ import {createAction, handleActions} from 'redux-actions';
 import {produce} from 'immer';
 import instance from '../../share/Request';   // axios 전역 설정
 import {getCookie} from '../../share/Cookie';
+import moment from 'moment';
 
 // Actions
 const SET_COMMENT = 'SET_COMMENT';
@@ -54,7 +55,7 @@ const addCommentDB = (comment) => {                       // 댓글 추가하는
       adId: adId,
       userId: userId,
     }, {headers: headers}).then(function(response) {
-      dispatch(addComment(adId, userId, nickname, content));
+      dispatch(addComment(comment));
     }).catch(function (error){
       console.log(`댓글 작성하기 오류: ${error}`);
     })
@@ -95,15 +96,20 @@ export default handleActions(
       draft.list = [...action.payload.comment_list];
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.list.unshift({adId: action.payload.adId, userId: action.payload.userId, nickname: action.payload.nickname, content: action.payload.content});
+      let c = action.payload.comment;
+      draft.list.push({
+        createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+        content: c.content,
+        userId: c.userId,
+        adId: c.adId
+      })
     }),
     [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
       draft.list[action.payload.comment.id] = action.payload.comment;
     }),
     [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
-      console.log(action.payload);
-      // const target_idx = draft.list.action.payload.commentId
-      // draft.list.splice(target_idx, 1);
+      let idx = draft.list.findIndex((p)=> p.id===action.payload.comment)
+      draft.list.splice(idx, 1);
     })
   }, initialState
 );

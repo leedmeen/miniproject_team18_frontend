@@ -20,6 +20,9 @@ const CommentList = (props) => {
   const editContent = (e) => {
     input(e.target.value);
   };
+  const onReset = () => {
+    setEdit("");
+  }
 
   const editComment = () => {
     const comment = {
@@ -34,6 +37,9 @@ const CommentList = (props) => {
   const deleteComment = (adId, id) => {
     dispatch(commentActions.deleteCommentDB(adId, id));
   }
+  useEffect(()=> {
+
+  })
 
   return (
     <React.Fragment>
@@ -46,7 +52,7 @@ const CommentList = (props) => {
       { my_userid == userId && edit ? 
         <>
           <Input type='text' _onChange={editContent} value={edit_content} width='45vw' height='3vh' fontSize='1.5vh' border='1px solid rgba(232, 52, 78, 0.4)' borderRadius='0.8vw' padding='0 0 0 1vw'></Input>
-          <Button _onClick={() => {editComment(); setEditContent('');}} width='60px' height='3.5vh' color='white' border='none' borderTRRadius='2vh' borderBRRadius='2vh' borderTLRadius='0.5vh' borderBLRadius='0.5vh' backgroundColor='#E8344E' text='수정' margin='0 0 0 -3.0vw' />
+          <Button _onClick={() => {editComment(); setEditContent(''); onReset();}} width='60px' height='3.5vh' color='white' border='none' borderTRRadius='2vh' borderBRRadius='2vh' borderTLRadius='0.5vh' borderBLRadius='0.5vh' backgroundColor='#E8344E' text='수정' margin='0 0 0 -3.0vw' />
         </>
       : '' }
         { my_userid == userId && !edit ?
